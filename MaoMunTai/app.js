@@ -1,16 +1,27 @@
+//-------------- Setting up required packages 
 const express = require('express');
 const app = express();
 const session = require('express-session');
-//const setupPassport = require('./init-passport');
 const bodyParser = require('body-parser');
 const https = require('https')
 const fs = require('fs')
-const router = require('./router/router')(express);
 const path = require('path')
+const hbs = require('express-handlebars');
+const pg = require('pg');
+
+//-------------- General package setup
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '/public')));
 require('dotenv').config()
 
-const port = process.env.PORT || 3030;
+//-------------- Handlebars setup
+app.engine('handlebars', hbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
+//-------------- authentication setup
+const setupPassport = require('./authentication/initPassport');
+const loginRouter = require('./router/loginRouter')(express);
 app.use(
   session({
     secret: 'supersecret',
@@ -18,16 +29,12 @@ app.use(
     saveUninitialized: true
   })
 );
-
-app.use(bodyParser.json());
-
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 setupPassport(app);
 
-app.use('/', router);
+
+
+//-------------- Routers setup
+app.use('/', loginRouter);
 
 const options ={
   cert: fs.readFileSync('./localhost.crt'),
