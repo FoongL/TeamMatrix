@@ -22,6 +22,7 @@ const knex = require('knex')(knexConfig);
 
 
 //-------------- Handlebars setup
+const viewRouter = require('./router/viewRouter');
 app.engine('handlebars', hbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -32,6 +33,16 @@ const ProjectService = require('./services/projectService');
 const projectRouter = require('./router/projectRouter');
 const projectService = new ProjectService(knex);
 
+
+//- task services setup
+const TaskService = require('./services/taskService');
+const taskRouter = require('./router/taskRouter');
+const taskService = new TaskService(knex);
+
+//- subtask services setup
+const SubtaskService = require('./services/subtaskService');
+const subtaskRouter = require('./router/subtaskRouter');
+const subtaskService = new SubtaskService(knex);
 
 //-------------- authentication setup
 const setupPassport = require('./authentication/initPassport');
@@ -48,8 +59,11 @@ setupPassport(app);
 
 
 //-------------- Routers routing
+//app.use('/', viewRouter);
 app.use('/', loginRouter);
 app.use('/api/projects', new projectRouter(projectService).router());
+app.use('/api/tasks', new taskRouter(taskService).router());
+app.use('/api/subtasks', new subtaskRouter(subtaskService).router());
 
 const options ={
   cert: fs.readFileSync('./localhost.crt'),
