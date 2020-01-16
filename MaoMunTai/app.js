@@ -15,9 +15,23 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
 require('dotenv').config()
 
+//-------------- setting up database connection
+const knexConfig = require('./knexfile').development;
+const knex = require('knex')(knexConfig);
+
+
+
 //-------------- Handlebars setup
 app.engine('handlebars', hbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
+
+//-------------- services setup
+
+//- Project services setup
+const ProjectService = require('./services/projectService');
+const projectRouter = require('./router/projectRouter');
+const projectService = new ProjectService(knex);
+
 
 //-------------- authentication setup
 const setupPassport = require('./authentication/initPassport');
@@ -33,8 +47,9 @@ setupPassport(app);
 
 
 
-//-------------- Routers setup
+//-------------- Routers routing
 app.use('/', loginRouter);
+app.use('/api/projects', new projectRouter(projectService).router());
 
 const options ={
   cert: fs.readFileSync('./localhost.crt'),
