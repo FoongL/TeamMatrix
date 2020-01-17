@@ -6,7 +6,7 @@ body{
     background-image: url(/assets/images/mao-cover.jpg);
     height: 100vh;
     width: 100vw;
-    margin-top: -20px;
+    margin-top: -7.8px;
     margin-left: -7.6px;
     display: table;
     width: 100%;
@@ -21,13 +21,29 @@ body{
 
 .main-cover:after {
     content: '';
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     left: 0;
     z-index: -1;
     opacity: .85;
-    position: absolute;
+    position: relative;
      
+}
+
+.ink-text{
+    color: #ccc;
+}
+
+.facebook{
+    background-image: url(/assets/images/facebook.png);
+    width: 100px;
+    height: 100px;
+}
+
+.gmail{
+    background-image: url(/assests/images/gmail.png);
+    width: 100px;
+    height: 100px;
 }
 
 
@@ -37,11 +53,12 @@ body{
     color: #444;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    width: 90%;
     border: none;
     text-align: left;
     outline: none;
     font-size: 15px;
+    align-content: center;
   }
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -65,6 +82,7 @@ body{
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    width: 86.4%;
   }
 
   input[type=text] {
@@ -95,11 +113,11 @@ body{
     z-index: 1;
     top: 0;
     right: 0;
-    padding: 50px;
+    padding: 0px;
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    background:rgba(0, 0, 0, 0.3) url(/assets/imagesfavicon.png)no-repeat center center;
+    background:rgba(0, 0, 0, 0.3) url(/assets/images/exit-button-icon.png)no-repeat center center;
     overflow: hidden;
     text-indent: 100%;
     white-space: nowrap;
