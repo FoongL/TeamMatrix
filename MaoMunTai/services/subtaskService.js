@@ -110,7 +110,7 @@ class SubtaskService {
       let untick = this.knex('sub_task')
       .where('id', subtaskID)
       .update({
-        completed_date: undefined
+        completed_date: null
       });
       untick.then(err => {
         res('Success');
