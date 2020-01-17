@@ -15,6 +15,9 @@ class SubtaskRouter {
     router.post('/add', this.addSubtask.bind(this));
     //router.put('/append/:index', this.put.bind(this));
     router.delete('/remove', this.deleteSubtask.bind(this));
+    router.put('/amassigned', this.amendPerson.bind(this));
+    router.put('/mark', this.markComplete.bind(this));
+    router.put('/unmark', this.markUnComplete.bind(this));
     return router;
   }
   addSubtask(req, res) {
@@ -27,7 +30,7 @@ class SubtaskRouter {
         req.body.name,
         req.body.dueDate
       )
-      .then(notes => res.send('It works!'))
+      .then(notes => res.send('added a subtask'))
       .catch(err => res.status(500).json(err));
   }
   deleteSubtask(req, res) {
@@ -35,11 +38,57 @@ class SubtaskRouter {
       .deleteSubtask(
         req.body.subtaskID
       )
-      .then(notes => res.send('I deleted it!'))
+      .then(notes => res.send('deleted subtask'))
       .catch(err => res.status(500).json(err));
   }
 
+  amendPerson(req, res) {
+    return this.subtaskService
+      .amendAssigned(
+        req.body.subtaskID,
+        req.body.userID
+      )
+      .then(notes => res.send('I amended assigned user'))
+      .catch(err => res.status(500).json(err));
+  }
 
+  amendName(req, res) {
+    return this.subtaskService
+      .amendName(
+        req.body.subtaskID,
+        req.body.name
+      )
+      .then(notes => res.send('I amended subtask name'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  amendDuedate(req, res) {
+    return this.subtaskService
+      .amendDuedate(
+        req.body.subtaskID,
+        req.body.dueDate
+      )
+      .then(notes => res.send('I amended subtask name'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  markComplete(req, res) {
+    return this.subtaskService
+      .markComplete(
+        req.body.subtaskID,
+      )
+      .then(notes => res.send('I mark completed!'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  markUnComplete(req, res) {
+    return this.subtaskService
+      .markUnComplete(
+        req.body.subtaskID,
+      )
+      .then(notes => res.send('I unmarked completed!'))
+      .catch(err => res.status(500).json(err));
+  }
 
 }
 
