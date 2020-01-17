@@ -63,7 +63,6 @@ class TaskService {
   }
 
   addAssigned (TaskID, assUser){
-    console.log('hi')
     return new Promise((res, rej) => {
       let assign =  this.knex
       .insert({
@@ -77,12 +76,16 @@ class TaskService {
     });
   }
 
-
-
-
-
-
-
+  removeUser (TaskID, assUser){
+    return new Promise((res, rej) => {
+      let remUser =  this.knex('task_assignment')
+      .where('id', subtaskID)
+      .del();
+      remUser.then(err => {
+        res('Success');
+      });
+    });
+  }
 
 }
 
