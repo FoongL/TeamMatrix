@@ -10,16 +10,11 @@ class ProjectRouter {
   // This utilises the express Router method, basically we are binding the path/ request to each restful verb
   router() {
     let router = express.Router();
-    //router.get('/', this.get.bind(this));
-    //router.post('/', this.post.bind(this));
     router.post('/add', this.addproject.bind(this));
-    //router.put('/append/:index', this.put.bind(this));
-    //router.delete('/remove/:index', this.delete.bind(this));
+    router.delete('/remove', this.deleteProject.bind(this));
     return router;
   }
   addproject(req, res) {
-    //console.log(req.session.passport.user.id)
-    //console.log(req.body.content, req.auth.user);
     return this.projectService
       .addProject(
         req.body.userId,
@@ -28,6 +23,15 @@ class ProjectRouter {
         req.body.dueDate
       )
       .then(notes => res.send('It works!'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  deleteProject(req, res) {
+    return this.projectService
+      .deleteProject(
+        req.body.projectId,
+      )
+      .then(notes => res.send('managed to clear the whole project'))
       .catch(err => res.status(500).json(err));
   }
 }
