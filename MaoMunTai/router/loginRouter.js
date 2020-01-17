@@ -36,9 +36,9 @@ module.exports = express => {
     res.send('You are not logged in!');
   });
 //double check main page URL
-  router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'../public/index.html'));
-  });
+  // router.get('/', (req, res) => {
+  //   res.sendFile(path.join(__dirname,'../public/index.html'));
+  // });
 //double check signup URL
   router.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname,'../public/signUp.html'));

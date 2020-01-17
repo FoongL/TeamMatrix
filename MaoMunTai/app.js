@@ -22,7 +22,7 @@ const knex = require('knex')(knexConfig);
 
 
 //-------------- Handlebars setup
-const viewRouter = require('./router/viewRouter');
+const viewRouter = require('./router/viewRouter')(express);
 app.engine('handlebars', hbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -59,8 +59,8 @@ setupPassport(app);
 
 
 //-------------- Routers routing
-//app.use('/', viewRouter);
-app.use('/', loginRouter);
+app.use('/', viewRouter);
+app.use('/oauth', loginRouter);
 app.use('/api/projects', new projectRouter(projectService).router());
 app.use('/api/tasks', new taskRouter(taskService).router());
 app.use('/api/subtasks', new subtaskRouter(subtaskService).router());
