@@ -132,3 +132,12 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
+//Social Media Login/Sign Up On Click
+
+$(`#facebook`).onclick('click', function(){
+
+})
+
+$(`#gmail`).onclick('click', function(){
+
+})
