@@ -10,16 +10,12 @@ class TaskRouter {
   // This utilises the express Router method, basically we are binding the path/ request to each restful verb
   router() {
     let router = express.Router();
-    //router.get('/', this.get.bind(this));
-    //router.post('/', this.post.bind(this));
     router.post('/add', this.addTask.bind(this));
-    //router.put('/append/:index', this.put.bind(this));
-    //router.delete('/remove/:index', this.delete.bind(this));
+    router.delete('/remove', this.deleteTask.bind(this));
+    router.put('/adduser', this.addUser.bind(this));
     return router;
   }
   addTask(req, res) {
-    //console.log(req.session.passport.user.id)
-    //console.log(req.body.content, req.auth.user);
     return this.taskService
       .addTask(
         req.body.userID,
@@ -28,9 +24,31 @@ class TaskRouter {
         req.body.desc,
         req.body.dueDate
       )
-      .then(notes => res.send('It works!'))
+      .then(notes => res.send('Added New Task'))
       .catch(err => res.status(500).json(err));
   }
+
+  deleteTask(req, res) {
+    return this.taskService
+      .addTask(
+        req.body.tasksID,
+      )
+      .then(notes => res.send('Deleted tasks and related stuff'))
+      .catch(err => res.status(500).json(err));
+  }
+  addUser(req, res) {
+    return this.taskService
+      .addAssigned(
+        req.body.tasksID,
+        req.body.user,
+      )
+      .then(notes => res.send('Added new user to the task'))
+      .catch(err => res.status(500).json(err));
+  }
+
+
+
+
 }
 
 module.exports = TaskRouter;

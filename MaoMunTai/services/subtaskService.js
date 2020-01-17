@@ -38,7 +38,6 @@ class SubtaskService {
       });
     });
   }
-
   deleteSubtask(subtaskID) {
     return new Promise((res, rej) => {
       let removeSubtask = this.knex('sub_task')
