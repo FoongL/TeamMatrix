@@ -39,6 +39,51 @@ class TaskService {
       });
     });
   }
+
+  deleteTask(TaskID) {
+    return new Promise((res, rej) => {
+      let delSubtask = this.knex('sub_task')
+        .where('task_id', TaskID)
+        .del();
+      let delTaskAss = this.knex('task_assignment')
+        .where('task_id', TaskID)
+        .del();
+      let delTask = this.knex('tasks')
+        .where('id', TaskID)
+        .del();
+        delSubtask.then(()=>{
+          return delTaskAss
+        }).then(()=>{
+          return delTask
+        })
+        .then(err => {
+        res('Success');
+      });
+    });
+  }
+
+  addAssigned (TaskID, assUser){
+    console.log('hi')
+    return new Promise((res, rej) => {
+      let assign =  this.knex
+      .insert({
+        user_id: assUser,
+        task_id: TaskID
+      })
+      .into('task_assignment');
+      assign.then(err => {
+        res('Success');
+      });
+    });
+  }
+
+
+
+
+
+
+
+
 }
 
 module.exports = TaskService;

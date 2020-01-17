@@ -60,7 +60,7 @@ setupPassport(app);
 
 //-------------- Routers routing
 app.use('/', viewRouter);
-app.use('/oauth', loginRouter);
+app.use('/', loginRouter);
 app.use('/api/projects', new projectRouter(projectService).router());
 app.use('/api/tasks', new taskRouter(taskService).router());
 app.use('/api/subtasks', new subtaskRouter(subtaskService).router());
