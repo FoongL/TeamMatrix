@@ -19,5 +19,9 @@ module.exports = express => {
     res.render('home');
   });
 
+  router.get('/projects', (req, res) => {
+    res.render('2', { title: '2', layout: 'project' });
+  })
+
   return router;
 };
