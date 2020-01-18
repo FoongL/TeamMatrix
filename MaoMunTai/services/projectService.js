@@ -7,21 +7,22 @@ class ProjectService {
     //this.listProjectPromise = this.listProject();
   }
   listProject(userID) {
-    if (userID === undefined) {
-      console.log('Something not right...');
-    } else {
+    // if (userID === undefined) {
+    //   console.log('Something not right...');
+    // } else {
       return new Promise((res, rej) => {
         let listKnex = this.knex('projects')
           .join('user_project', 'user_project.project_id', 'projects.id')
           .join('users', 'users.id', 'user_project.user_id')
-          .select('*')
+          .select('projects.id', 'projects.name','projects.desc','projects.due_date')
           .where('users.id', userID)
-          .orderBy('created_at');
+          .orderBy('projects.created_at');
         listKnex.then(rows => {
+          console.log(rows)
           res(rows);
         });
       });
-    }
+   // }
   }
 
   addProject(userID, name, desc, dueDate) {

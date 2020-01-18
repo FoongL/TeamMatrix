@@ -10,10 +10,20 @@ class ProjectRouter {
   // This utilises the express Router method, basically we are binding the path/ request to each restful verb
   router() {
     let router = express.Router();
+    router.get('/', this.listprojects.bind(this));
     router.post('/add', this.addproject.bind(this));
     router.delete('/remove', this.deleteProject.bind(this));
     return router;
   }
+  listprojects(req, res) {
+    return this.projectService
+      .listProject(
+        req.body.userId,
+      )
+      .then(notes => res.json(notes))
+      .catch(err => res.status(500).json(err));
+  }
+
   addproject(req, res) {
     return this.projectService
       .addProject(
