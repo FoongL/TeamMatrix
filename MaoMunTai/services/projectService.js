@@ -110,8 +110,8 @@ class ProjectService {
         .from('tasks')
         .where({ project_id: projectID });
       let delUserProject = this.knex('user_project')
-      .where('project_id', projectID)
-      .del();
+        .where('project_id', projectID)
+        .del();
       let delProject = this.knex('projects')
         .where('id', projectID)
         .del();
@@ -147,6 +147,64 @@ class ProjectService {
           res('Success');
         });
     });
+  }
+  addUser(projectID, user) {
+    let addUser = this.knex
+      .insert({
+        user_id: user,
+        project_id: projectID
+      })
+      .into('user_project');
+    addUser.then(err => {
+      res('Success');
+    });
+  }
+  removeUser(projectID, user) {
+    let remUser = this.knex('user_project')
+      .where({
+        project_id: projectID,
+        user_id: user
+      })
+      .del();
+    remUser.then(err => {
+      res('Success');
+    });
+  }
+
+  checkAdmin(projectID) {
+    let adminCheck = this.knex
+      .select('id')
+      .from('user_project')
+      .where({
+        project_id: 'projectID',
+        admin: 'true'
+      });
+    adminCheck
+      .then(data => {
+        if (data[0].length == 0) {
+          let oldestUser = this.knex
+            .select('id')
+            .from('user_project')
+            .where({
+              project_id: 'projectID'
+            })
+            .orderBy('created_at')
+            .limit('1');
+
+        oldestUser.then(newUser=>{
+          let newAdmin = newUser[0]['id']
+          return this.knex('user_project')
+          .where('id', newAdmin)
+          .update({
+            admin: true
+          });
+        })    
+        }
+      })
+
+      .then(err => {
+        res('Success');
+      });
   }
 }
 

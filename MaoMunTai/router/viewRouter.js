@@ -11,7 +11,7 @@ module.exports = express => {
       return next();
     }
     //double check login or signup URL
-    res.redirect('/login'); 
+    res.redirect('/test'); 
   }
 
   //double check main page URL
@@ -21,6 +21,20 @@ module.exports = express => {
 
   router.get('/projects', (req, res) => {
     res.render('2', { title: '2', layout: 'project' });
+  })
+
+
+
+
+  //-------------test site:
+  router.get('/test', (req, res) => {
+    res.render('testLogin');
+  })
+
+  router.get('/testproject',isLoggedIn, (req, res) => {
+    let user = req.session.passport.user;
+    console.log(user)
+    res.render('2', { title: '2', layout: 'projectTest' });
   })
 
   return router;

@@ -15,19 +15,14 @@ module.exports = express => {
     res.redirect('/login'); 
   }
    //double check user homepage URL
-  router.get('/secret', isLoggedIn, (req, res) => {
-    res.send('Here you go, a secret');
-  });
-
-  //double check login or signup URL
-  router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname,'../public/login.html'));
-  });
+  // router.get('/secret', isLoggedIn, (req, res) => {
+  //   res.send('Here you go, a secret');
+  // });
 
   router.post(
     '/login',
     passport.authenticate('local-login', {
-      successRedirect: '/secret',
+      successRedirect: '/testproject',
       failureRedirect: '/error'
     })
   );
@@ -35,20 +30,12 @@ module.exports = express => {
   router.get('/error', (req, res) => {
     res.send('You are not logged in!');
   });
-//double check main page URL
-  // router.get('/', (req, res) => {
-  //   res.sendFile(path.join(__dirname,'../public/index.html'));
-  // });
-//double check signup URL
-  router.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname,'../public/signUp.html'));
-  });
 
   //re-direct to our welcome page?
   router.post(
     '/signup',
     passport.authenticate('local-signup', {
-      successRedirect: '/secret',
+      successRedirect: '/testproject',
       failureRedirect: '/error'
     })
   );
@@ -64,9 +51,9 @@ module.exports = express => {
   router.get(
     '/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/secret',
+      successRedirect: '/testproject',
 
-      failureRedirect: '/login'
+      failureRedirect: '/'
     })
   );
 
@@ -83,9 +70,9 @@ module.exports = express => {
 
   router.get(
     '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { failureRedirect: '/' }),
     function(req, res) {
-      res.redirect('/secret');
+      res.redirect('/testproject');
     }
   );
 
