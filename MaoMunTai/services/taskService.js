@@ -6,21 +6,19 @@ class TaskService {
     //this.notes = {};
     //this.listProjectPromise = this.listProject();
   }
-  listTask(userID, projectID) {
-    if (userID === undefined) {
-      console.log('Something not right...');
-    } else {
+  listTask(projectID, phase) {
       return new Promise((res, rej) => {
         let listKnex = this.knex('tasks')
           .join('projects', 'tasks.project_id', 'projects.id')
-          .select('*')
-          .where('projects.id', projectID)
-          .groupBy('phase');
+          .select('tasks.id', 'tasks.name', 'tasks.due_date','tasks.label')
+          .where({'projects.id':projectID,'phase':phase})
+          .orderBy('due_date')
         listKnex.then(rows => {
+          //console.log(rows)
           res(rows);
         });
       });
-    }
+
   }
 
   addTask(userID, projectID, name, desc, dueDate) {

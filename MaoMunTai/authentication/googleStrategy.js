@@ -23,8 +23,8 @@ module.exports = passport => {
         callbackURL: '/auth/google/callback'
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
-        console.log(profile._json.email);
+        //console.log(profile);
+        //console.log(profile._json.email);
 
         let userResult = await knex('users').where({ googleID: profile.id });
 
