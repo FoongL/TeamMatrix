@@ -7,73 +7,56 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Comrade {{{last_name}}}</title>
     <link rel="stylesheet" href="/assets/css/project.css">
+    <script src="/assets/javascript/modernizr-custom.js"></script>
 </head>
 
 <body>
-    <!-- Main container -->
-    <div class="container">
-        <header class="bp-header cf">
-            <div class="dummy-logo">
-                <h2 class="dummy-heading">Mao Mun Tai</h2>
-            </div>
-        </header>
-        <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
-        <nav id="ml-menu" class="menu">
-            <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
-            <div class="menu__wrap">
-                <ul data-menu="main" class="menu__level menu__level--current" tabindex="-1" role="menu" aria-label="All">
-                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-1"
-                            aria-owns="submenu-1" href="#">Projects</a></li>
-                    <li class="menu__item" role="menuitem"><a class="menu__link" data-submenu="submenu-2"
-                            aria-owns="submenu-2" href="#">Dashboard</a></li>
-                </ul>
-                <!-- Submenu 1 -->
-                <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
-                    aria-label="Projects">
-                    <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Tasks</a></li>
-                </ul>
-                <!-- Submenu 2 -->
-                <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu"
-                    aria-label="Dashboard">
-                    <li class="menu__item" role="menuitem"><a class="menu__link" href="#">History</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div class="content">
-            <img src="/assets/images/project-mao.png">
-            <p class="info">What we need is an enthusiastic but calm state of mind, and intense but orderly work. - Mao
-                (1939)</p>
-        </div>
-    </div>
+    {{{body}}}
 
+<script src="/assets/javascript/classie.js"></script>
+    <script src="/assets/javascript/project.js"></script>
     <script>
-        (function () {
-            var menuEl = document.getElementById('ml-menu'),
-                mlmenu = new MLMenu(menuEl, {
-                    breadcrumbsCtrl : true, // show breadcrumbs
-                    initialBreadcrumb : 'all', // initial breadcrumb text
-                    backCtrl: false, // show back button
-                    itemsDelayInterval : 60, // delay between each menu item sliding animation
-                    onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                });
+    (function () {
+	var menuEl = document.getElementById('ml-menu'),
+		 mlmenu = new MLMenu(menuEl, {
+			// breadcrumbsCtrl : true, // show breadcrumbs
+			// initialBreadcrumb : 'all', // initial breadcrumb text
+			backCtrl: false, // show back button
+			// itemsDelayInterval : 60, // delay between each menu item sliding animation
+			onItemClick: loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
+		});
 
-            mobile menu toggle
-            var openMenuCtrl = document.querySelector('.action--open'),
-                closeMenuCtrl = document.querySelector('.action--close');
+	//mobile menu toggle
+	var openMenuCtrl = document.querySelector('.action--open'),
+		closeMenuCtrl = document.querySelector('.action--close');
 
-            openMenuCtrl.addEventListener('click', openMenu);
-            closeMenuCtrl.addEventListener('click', closeMenu);
+	openMenuCtrl.addEventListener('click', openMenu);
+	closeMenuCtrl.addEventListener('click', closeMenu);
 
-            function openMenu() {
-                classie.add(menuEl, 'menu--open');
-                closeMenuCtrl.focus();
-            }
+	function openMenu() {
+		classie.add(menuEl, 'menu--open');
+		closeMenuCtrl.focus();
+	}
 
-            function closeMenu() {
-                classie.remove(menuEl, 'menu--open');
-                openMenuCtrl.focus();
-            }
-        })();</script>
-    <script src="/2.js"></script>
+	function closeMenu() {
+		classie.remove(menuEl, 'menu--open');
+		openMenuCtrl.focus();
+	}
+	// simulate grid content loading
+	var gridWrapper = document.querySelector('.content');
+
+	function loadDummyData(ev, itemName) {
+		ev.preventDefault();
+
+		closeMenu();
+		gridWrapper.innerHTML = '';
+		classie.add(gridWrapper, 'content--loading');
+		setTimeout(function() {
+			classie.remove(gridWrapper, 'content--loading');
+			gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
+		}, 700);
+	}
+})();
+</script>
 </body >
 </html >
