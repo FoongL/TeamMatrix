@@ -10,11 +10,14 @@
                 </div>
         </div>
 
-        <div class='container' id='taskManagementDisplay'>
+        <div class='mainBody' id='taskManagementDisplay'>
                 <div class='phaseDisplay' id='assignedtasks'>
                         <div id='assignTaskHeader'>
-                        <h3 class='taskLabel'>Assigned</h3>
-                        <a>+ Add Task</a>
+                                <h3 class='taskLabel'>Assigned</h3>
+                                <a data-toggle="modal" data-target="#addTaskModal">
+                                        + Add Task
+                                </a>
+
                         </div>
                         <div class='taskDisplay'>
                                 {{#each taskAssigned}}
@@ -50,3 +53,59 @@
                                 <div id='buttSpace'></div>
                         </div>
                 </div>
+        </div>
+</div>
+
+<div class="modal fade" id="addTaskModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Name:</label>
+                                                <input type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Description:</label>
+                                                <input type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Due Date:</label>
+                                                <input type="date" required>
+                                        </div>
+
+                                        <div class="addTaskInput">
+                                                <label>Priority:</label>
+                                                <div class"radioInput">
+                                                        <input type="radio" name="priority" value="1"><label>
+                                                                &#160;&#160;Urgent AND Important</label><br>
+                                                        <input type="radio" name="priority" value="2"><label>
+                                                                &#160;&#160;Urgent but NOT Important</label><br>
+                                                        <input type="radio" name="priority" value="3"><label>
+                                                                &#160;&#160;NOT Urgent but Important</label><br>
+                                                        <input type="radio" name="priority" value="4"><label>
+                                                                &#160;&#160;NOT Urgent or Important</label><br>
+                                                </div>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Assign Task:</label>
+                                                <input id='userSearch' type="text" required>
+                                        </div>
+                                        <div id="nameList"></div>
+
+
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                </div>
+        </div>
+</div>

@@ -112,7 +112,7 @@ module.exports = express => {
       taskAssigned: assigned,
       taskInProgress: inProgress,
       takCompleted: completed,
-      title: '2',
+      //title: '2',
       layout: 'projectTest'
     });
   });

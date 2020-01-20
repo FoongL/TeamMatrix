@@ -30,7 +30,7 @@
 }
 
 #taskManagementDisplay {
-  height: 75%;
+  height: 80%;
   display: flex;
   justify-content: space-evenly;
 }
@@ -107,7 +107,58 @@ h6 {
 }
 
 #assignTaskHeader a{
+    display: inline-block;
     padding-top: 20px;
     padding-right: 10px;
     color: rgb(97, 97, 97);
+    cursor: pointer;
 }
+
+#assignTaskHeader a:after{
+    content: '';
+    width: 0px;
+    height: 2px;
+    display: block;
+    background: rgb(97, 97, 97);
+    transition: 300ms;
+}
+#assignTaskHeader a:hover:after {
+    width: 100%;
+  }
+
+/* Modal Formatting */
+#addTaskTitle{
+    color: rgb(97, 97, 97);
+    font-size: 28px;
+}
+#addTaskModal{
+    /* height: 70%;
+    width: 70%; */
+    margin:auto;
+}
+.addTaskInput{
+    display:flex;
+    flex-direction: column;
+}
+.addTaskInput label{
+    color: rgb(97, 97, 97);
+}
+
+.addTaskInput input{
+    border: none;
+    border-bottom: solid rgb(97, 97, 97) 1px;
+    display: inline-block;
+}
+
+.addTaskInput input:focus{
+    outline-width: 0;
+    border-bottom: solid rgb(179, 120, 120) 1.3px;
+}
+
+.radioInput{
+    flex-direction: row;
+}
+.radioInput label{
+    margin-bottom:5px;
+}
+
