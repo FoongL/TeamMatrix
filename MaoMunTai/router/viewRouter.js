@@ -105,6 +105,7 @@ module.exports = express => {
       ', ' +
       dueDate.getFullYear();
     res.render('projectDetails', {
+      projectID: projects,
       projectName: projectDetails[0]['name'],
       projectDesc: projectDetails[0]['desc'],
       projectDue: dateDue,

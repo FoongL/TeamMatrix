@@ -1,6 +1,6 @@
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-  display:none;
+  display: none;
 }
 
 .content {
@@ -39,14 +39,14 @@
   height: 100%;
   width: 28%;
   border-radius: 8px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.taskDisplay{
-    height: 91%;
-    width: 100%;
-    overflow:scroll;
-    margin-top:0px;
+.taskDisplay {
+  height: 91%;
+  width: 100%;
+  overflow: scroll;
+  margin-top: 0px;
 }
 
 .taskLabel {
@@ -57,8 +57,8 @@
   padding-bottom: 2px;
 }
 
-#buttSpace{
-    height:20px;
+#buttSpace {
+  height: 20px;
 }
 
 #assignedtasks {
@@ -80,7 +80,7 @@
   max-height: 20%;
   width: 95%;
   background-color: rgb(202, 186, 182);
-  margin-top:5px;
+  margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
@@ -89,7 +89,7 @@
 
 h6 {
   font-size: 28px;
-  margin-top:30px;
+  margin-top: 30px;
   margin-bottom: 2px;
   margin-left: 10px;
 }
@@ -98,67 +98,116 @@ h6 {
   font-size: 14px;
   margin-top: 3px;
   margin-left: 10px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
-#assignTaskHeader{
-    display:flex;
-    justify-content: space-between;
+#assignTaskHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
-#assignTaskHeader a{
-    display: inline-block;
-    padding-top: 20px;
-    padding-right: 10px;
-    color: rgb(97, 97, 97);
-    cursor: pointer;
+#assignTaskHeader a {
+  display: inline-block;
+  padding-top: 20px;
+  padding-right: 10px;
+  color: rgb(97, 97, 97);
+  cursor: pointer;
 }
 
-#assignTaskHeader a:after{
-    content: '';
-    width: 0px;
-    height: 2px;
-    display: block;
-    background: rgb(97, 97, 97);
-    transition: 300ms;
+#assignTaskHeader a:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: rgb(97, 97, 97);
+  transition: 300ms;
 }
 #assignTaskHeader a:hover:after {
-    width: 100%;
-  }
+  width: 100%;
+}
 
 /* Modal Formatting */
-#addTaskTitle{
-    color: rgb(97, 97, 97);
-    font-size: 28px;
+#addTaskTitle {
+  color: rgb(97, 97, 97);
+  font-size: 28px;
 }
-#addTaskModal{
-    /* height: 70%;
+#addTaskModal {
+  /* height: 70%;
     width: 70%; */
-    margin:auto;
+  margin: auto;
 }
-.addTaskInput{
+.addTaskInput {
+  display: flex;
+  flex-direction: column;
+}
+.addTaskInput label {
+  color: rgb(97, 97, 97);
+}
+
+.addTaskInput input {
+  border: none;
+  border-bottom: solid rgb(97, 97, 97) 1px;
+  display: inline-block;
+}
+
+.addTaskInput input:focus {
+  outline-width: 0;
+  border-bottom: solid rgb(179, 120, 120) 1.3px;
+}
+
+.radioInput {
+  flex-direction: row;
+}
+.radioInput label {
+  margin-bottom: 5px;
+}
+
+#nameList {
+  height: 40px;
+  overflow: scroll;
+}
+
+.clickable {
+  cursor: pointer;
+  color:rgb(63, 63, 63);
+}
+
+#inTheProject {
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: auto;
+}
+.memberList {
+  display: inline-block;
+  margin: none;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5px;
+  text-decoration: underline;
+  color: rgb(179, 120, 120);
+}
+
+form label{
+    margin-top: 1.5px;
+}
+
+#SubTaskModal{
+    border: 2px rgb(121, 121, 121) solid;   
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#subtaskButt{
+    height: 40px;
     display:flex;
-    flex-direction: column;
-}
-.addTaskInput label{
-    color: rgb(97, 97, 97);
+    flex-direction:row;
 }
 
-.addTaskInput input{
-    border: none;
-    border-bottom: solid rgb(97, 97, 97) 1px;
-    display: inline-block;
+#subtaskButt p{
+    margin:none;
+    padding:none;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: rgb(48, 48, 48);
 }
-
-.addTaskInput input:focus{
-    outline-width: 0;
-    border-bottom: solid rgb(179, 120, 120) 1.3px;
-}
-
-.radioInput{
-    flex-direction: row;
-}
-.radioInput label{
-    margin-bottom:5px;
-}
-

@@ -23,12 +23,11 @@ class SubtaskService {
     }
   }
 
-  addSubtask(assigned, taskID, name, dueDate) {
+  addSubtask(taskID, name, dueDate) {
     return new Promise((res, rej) => {
       let creation = this.knex
         .insert({
           task_id: taskID,
-          assigned_to: assigned,
           name: name,
           due_date: dueDate
         })

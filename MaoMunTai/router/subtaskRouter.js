@@ -24,7 +24,6 @@ class SubtaskRouter {
     //console.log(req.body.content, req.auth.user);
     return this.subtaskService
       .addSubtask(
-        req.body.userID,
         req.body.taskID,
         req.body.name,
         req.body.dueDate

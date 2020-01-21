@@ -1,3 +1,4 @@
+<div class='secretIDHolder' id={{projectID}}></div>
 <div class="content">
         <div class='ProjectDetails'>
                 <div>
@@ -14,7 +15,7 @@
                 <div class='phaseDisplay' id='assignedtasks'>
                         <div id='assignTaskHeader'>
                                 <h3 class='taskLabel'>Assigned</h3>
-                                <a data-toggle="modal" data-target="#addTaskModal">
+                                <a id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
                                         + Add Task
                                 </a>
 
@@ -57,7 +58,7 @@
 </div>
 
 <div class="modal fade" id="addTaskModal">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
                                 <h5 class="modal-title" id="addTaskTitle">Add New Task</h5>
@@ -69,18 +70,17 @@
                                 <form>
                                         <div class="addTaskInput">
                                                 <label>Name:</label>
-                                                <input type="text" required>
+                                                <input id='taskName' type="text" required>
                                         </div>
                                         <div class="addTaskInput">
                                                 <label>Description:</label>
-                                                <input type="text" required>
+                                                <input id='taskDesc' type="text" required>
                                         </div>
                                         <div class="addTaskInput">
                                                 <label>Due Date:</label>
-                                                <input type="date" required>
+                                                <input id= 'taskDue' type="date" required>
                                         </div>
-
-                                        <div class="addTaskInput">
+                                        {{!-- <div class="addTaskInput">
                                                 <label>Priority:</label>
                                                 <div class"radioInput">
                                                         <input type="radio" name="priority" value="1"><label>
@@ -92,19 +92,53 @@
                                                         <input type="radio" name="priority" value="4"><label>
                                                                 &#160;&#160;NOT Urgent or Important</label><br>
                                                 </div>
-                                        </div>
+                                        </div> --}}
+                                        <div id="inTheProject"></div>
                                         <div class="addTaskInput">
-                                                <label>Assign Task:</label>
+                                                <label>Assign Team Members:</label>
                                                 <input id='userSearch' type="text" required>
                                         </div>
                                         <div id="nameList"></div>
-
-
                                 </form>
+                                <div id='subtaskButt'>
+
+                                        <button id='subButton' type="button" class="btn btn-secondary" data-toggle="modal"
+                                                data-target="#addSubTaskModal">Add Sub-task</button>
+                                         <div id='subButt'></div>
+                                </div>
                         </div>
                         <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button id='taskSave' type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<div class="modal fade" id="addSubTaskModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Subtask</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Name:</label>
+                                                <input id='subtaskName' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Due Date:</label>
+                                                <input id='subtaskDue' type="date" required>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='subSave' type="button" class="btn btn-primary">Save Subtask</button>
                         </div>
                 </div>
         </div>

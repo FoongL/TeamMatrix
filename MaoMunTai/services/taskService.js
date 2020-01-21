@@ -3,22 +3,30 @@ const fs = require('fs');
 class TaskService {
   constructor(knex) {
     this.knex = knex;
-    //this.notes = {};
-    //this.listProjectPromise = this.listProject();
   }
   listTask(projectID, phase) {
-      return new Promise((res, rej) => {
-        let listKnex = this.knex('tasks')
-          .join('projects', 'tasks.project_id', 'projects.id')
-          .select('tasks.id', 'tasks.name', 'tasks.due_date','tasks.label')
-          .where({'projects.id':projectID,'phase':phase})
-          .orderBy('due_date')
-        listKnex.then(rows => {
-          //console.log(rows)
-          res(rows);
-        });
+    return new Promise((res, rej) => {
+      let listKnex = this.knex('tasks')
+        .join('projects', 'tasks.project_id', 'projects.id')
+        .select('tasks.id', 'tasks.name', 'tasks.due_date', 'tasks.label')
+        .where({ 'projects.id': projectID, phase: phase })
+        .orderBy('due_date');
+      listKnex.then(rows => {
+        res(rows);
       });
-
+    });
+  }
+  getTaskId(userID, dueDate) {
+    return new Promise((res, rej) => {
+      let idGrab = this.knex('tasks')
+        .select('id')
+        .where({due_date: dueDate, created_by: userID })
+        .orderBy('due_date', 'DESC')
+        .limit('1');
+        idGrab.then(data => {
+        res(data);
+      });
+    });
   }
 
   addTask(userID, projectID, name, desc, dueDate) {
@@ -187,7 +195,7 @@ class TaskService {
       amend.then(err => {
         res('Success');
       });
-    }); 
+    });
   }
 
   amendDuedate(TaskID, dueDate) {
@@ -200,13 +208,13 @@ class TaskService {
       amend.then(err => {
         res('Success');
       });
-    }); 
+    });
   }
 
   markComplete(TaskID) {
     return new Promise((res, rej) => {
       var curTime = new Date();
-      curTime =curTime.toISOString().slice(0, 10)+' 00:00:00+08';
+      curTime = curTime.toISOString().slice(0, 10) + ' 00:00:00+08';
       let tick = this.knex('tasks')
         .where('id', TaskID)
         .update({
