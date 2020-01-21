@@ -23,7 +23,7 @@ const knex = require('knex')(knexConfig);
 
 //-------------- Handlebars setup
 const viewRouter = require('./router/viewRouter')(express);
-app.engine('handlebars', hbs({ defaultLayout: 'main' }));
+app.engine('handlebars', hbs({ defaultLayout: 'main', layoutsDir: __dirname + '/views/layouts/', partialsDir: __dirname + '/views/partials/' }));
 app.set('view engine', 'handlebars');
 
 //-------------- services setup

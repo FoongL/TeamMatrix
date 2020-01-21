@@ -374,3 +374,5 @@
 	window.MLMenu = MLMenu;
 
 })(window);
+
+Handlebars.registerPartial("navbar",$("nav-bar").handlebars());
