@@ -32,7 +32,7 @@ module.exports = passport => {
         ]
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
+        //console.log(profile);
 
         let userResult = await knex('users').where({ facebookID: profile.id });
 
