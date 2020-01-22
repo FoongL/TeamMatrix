@@ -36,7 +36,7 @@
 }
 
 .phaseDisplay {
-  height: 100%;
+  height: 80vh;
   width: 28%;
   border-radius: 8px;
   overflow: hidden;
@@ -79,19 +79,21 @@
 .task {
   max-height: 20%;
   width: 95%;
-  background-color: rgb(202, 186, 182);
+  background-color: rgb(219, 219, 219);
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5px;
   box-shadow: 6px 5px 19px -4px rgba(0, 0, 0, 0.79);
+  cursor: pointer;
 }
 
 h6 {
-  font-size: 28px;
+  font-size: 22px;
   margin-top: 30px;
   margin-bottom: 2px;
   margin-left: 10px;
+  text-decoration: underline;
 }
 
 .task p {
@@ -126,8 +128,8 @@ h6 {
   width: 100%;
 }
 
-/* Modal Formatting */
-#addTaskTitle {
+/* Add Task Modal Formatting */
+.modal-title {
   color: rgb(97, 97, 97);
   font-size: 28px;
 }
@@ -136,6 +138,7 @@ h6 {
     width: 70%; */
   margin: auto;
 }
+
 .addTaskInput {
   display: flex;
   flex-direction: column;
@@ -169,7 +172,7 @@ h6 {
 
 .clickable {
   cursor: pointer;
-  color:rgb(63, 63, 63);
+  color: rgb(63, 63, 63);
 }
 
 #inTheProject {
@@ -189,25 +192,116 @@ h6 {
   color: rgb(179, 120, 120);
 }
 
-form label{
-    margin-top: 1.5px;
+form label {
+  margin-top: 1.5px;
 }
 
-#SubTaskModal{
-    border: 2px rgb(121, 121, 121) solid;   
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+#SubTaskModal {
+  border: 2px rgb(121, 121, 121) solid;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-#subtaskButt{
-    height: 40px;
-    display:flex;
-    flex-direction:row;
+#subtaskButt {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
 }
 
-#subtaskButt p{
-    margin:none;
-    padding:none;
-    margin-left: 10px;
-    margin-top: 10px;
-    color: rgb(48, 48, 48);
+#subtaskButt p {
+  margin: none;
+  padding: none;
+  margin-left: 10px;
+  margin-top: 10px;
+  color: rgb(48, 48, 48);
+}
+/* Task Detail Modal css*/
+.modal-header {
+  align-items: center;
+}
+
+#TaskModalBody h6 {
+  padding: none;
+  margin: none;
+  color: rgb(97, 97, 97);
+}
+
+#subtaskCheck {
+  border: solid rgb(97, 97, 97) 1px;
+}
+#TaskModalBody{
+  display:flex;
+  flex-direction:row;
+  height: 400px;
+}
+#TaskModalBodyBreak{
+  width: 59%;
+  height: 100%;
+}
+#TaskModalDetails{
+  width: 39%;
+}
+#TaskMemberList{
+  border: solid rgb(182, 182, 182) 1px;
+  width: 100%;
+  height: 30%;
+}
+
+#TaskEditList{
+  border: solid rgb(182, 182, 182) 1px;
+}
+
+/* for the start project toggle */
+#startButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 30px;
+}
+
+#startButton label {
+  margin-right: 5px;
+  color: rgb(63, 63, 63);
+  font-size: 24px;
+}
+
+#switch {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#switchLabel {
+  cursor: pointer;
+  text-indent: -3000px;
+  width: 60px;
+  height: 30px;
+  background: grey;
+  display: block;
+  border-radius: 30px;
+  position: relative;
+}
+
+#switchLabel:after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  width: 27px;
+  height: 27px;
+  background: #fff;
+  border-radius: 27px;
+  transition: 0.3s;
+}
+
+#switch:checked + #switchLabel {
+  background: rgb(137, 174, 209);
+}
+
+#switch:checked + #switchLabel:after {
+  left: calc(100% - 1.5px);
+  transform: translateX(-100%);
+}
+
+#switchLabel:active:after {
+  width: 39px;
 }

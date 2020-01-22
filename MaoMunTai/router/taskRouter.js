@@ -11,7 +11,9 @@ class TaskRouter {
   router() {
     let router = express.Router();
     router.post('/add', this.addTask.bind(this));
+    router.post('/getusers', this.getusers.bind(this));
     router.post('/getid', this.getid.bind(this));
+    router.post('/getdetail', this.getDetails.bind(this));
     router.delete('/remove', this.deleteTask.bind(this));
     router.put('/adduser', this.addUser.bind(this));
     router.put('/removeuser', this.remUser.bind(this));
@@ -37,13 +39,29 @@ class TaskRouter {
       .then(notes => res.send('Added New Task'))
       .catch(err => res.status(500).json(err));
   }
-
+  getusers(req, res) {
+    return this.taskService
+      .listUsers(
+        req.body.taskID
+      )
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json(err));
+  }
   getid(req, res) {
     return this.taskService
       .getTaskId(
         req.session.passport.user.id,
         //req.body.userID,
         req.body.dueDate
+      )
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json(err));
+  }
+
+  getDetails(req, res) {
+    return this.taskService
+      .TaskDetails(
+        req.body.taskID
       )
       .then(data => res.json(data))
       .catch(err => res.status(500).json(err));

@@ -10,6 +10,7 @@ class SubtaskRouter {
   // This utilises the express Router method, basically we are binding the path/ request to each restful verb
   router() {
     let router = express.Router();
+    router.post('/list', this.listSubtask.bind(this));
     router.post('/add', this.addSubtask.bind(this));
     router.delete('/remove', this.deleteSubtask.bind(this));
     router.put('/amassigned', this.amendPerson.bind(this));
@@ -19,6 +20,17 @@ class SubtaskRouter {
     router.put('/unmark', this.markUnComplete.bind(this));
     return router;
   }
+  listSubtask(req, res) {
+    //console.log(req.session.passport.user.id)
+    //console.log(req.body.content, req.auth.user);
+    return this.subtaskService
+      .listSubtask(
+        req.body.taskID
+      )
+      .then(notes => res.json(notes))
+      .catch(err => res.status(500).json(err));
+  }
+
   addSubtask(req, res) {
     //console.log(req.session.passport.user.id)
     //console.log(req.body.content, req.auth.user);

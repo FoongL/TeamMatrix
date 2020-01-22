@@ -6,21 +6,17 @@ class SubtaskService {
     //this.notes = {};
     //this.listProjectPromise = this.listProject();
   }
-  listSubtask(userID, TaskID) {
-    if (userID === undefined) {
-      console.log('Something not right...');
-    } else {
+  listSubtask(TaskID) {
       return new Promise((res, rej) => {
-        let listKnex = this.knex('sub_tasks')
-          .join('tasks', 'sub_tasks.task_id', 'tasks.id')
-          .select('*')
+        let listKnex = this.knex('sub_task')
+          .join('tasks', 'sub_task.task_id', 'tasks.id')
+          .select('sub_task.id', 'sub_task.name', 'sub_task.due_date')
           .where('tasks.id', TaskID)
-          .orderBy('due_date');
+          .orderBy('sub_task.due_date');
         listKnex.then(rows => {
           res(rows);
         });
       });
-    }
   }
 
   addSubtask(taskID, name, dueDate) {

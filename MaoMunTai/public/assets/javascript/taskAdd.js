@@ -11,7 +11,7 @@ addTaskButton.on('click', function() {
   subTaskList = [];
   taskAssignList = new Set();
   $('#inTheProject').empty();
-  $('#subButt').empty()
+  $('#subButt').empty();
   $.ajax({
     url: `/api/projects/getusers`,
     type: 'POST',
@@ -83,6 +83,8 @@ $('#nameList,.clickable').on('click', function(event) {
 $('#subSave').on('click', function(event) {
   subtaskName = $('#subtaskName').val();
   subtaskDue = $('#subtaskDue').val();
+  let curTime = new Date();
+  today = curTime.toISOString().slice(0, 10) + ' 00:00:00+08';
   if (subtaskName == '') {
     alert('Please insert Subtask Name');
     return;
@@ -91,57 +93,81 @@ $('#subSave').on('click', function(event) {
     alert('Please insert a due date');
     return;
   }
-  let saveSubtask = {name:`${subtaskName}`,due_date:`${subtaskDue}`};
+  if (subtaskDue < today) {
+    alert('Due dates can only be set for the future.');
+    return;
+  }
+
+  let saveSubtask = { name: `${subtaskName}`, due_date: `${subtaskDue}` };
   subTaskList.push({ saveSubtask });
   //console.log(subTaskList);
   $('#subtaskName').val('');
   $('#subtaskDue').val('');
-  if (subTaskList.length == 1){
+  if (subTaskList.length == 1) {
     $('#subButt').html(`<p>${subTaskList.length} Subtask saved.</p>`);
-  } else{
-  $('#subButt').html(`<p>${subTaskList.length} Subtasks saved.</p>`);
+  } else {
+    $('#subButt').html(`<p>${subTaskList.length} Subtasks saved.</p>`);
   }
 });
 
 // ------ adding tasks
 
-$('#taskSave').on('click', async function(event){
-    taskName = $('#taskName').val();
-    taskDesc = $('#taskDesc').val();
-    taskDue = $('#taskDue').val();
+$('#taskSave').on('click', async function(event) {
+  taskName = $('#taskName').val();
+  taskDesc = $('#taskDesc').val();
+  taskDue = $('#taskDue').val();
+  let userList = Array.from(taskAssignList);
 
-    let userList = Array.from(taskAssignList)
+  //----- input validation
+  let curTime = new Date();
+  today = curTime.toISOString().slice(0, 10) + ' 00:00:00+08';
+  if (taskName == '') {
+    alert('Please input a name for your task');
+    return;
+  }
+  if (taskDesc == '') {
+    alert('Please input a small description for your task');
+    return;
+  }
+  if (taskDue == '') {
+    alert('Please select target due date for your task');
+    return;
+  }
+  if (taskDue < today) {
+    alert('Due dates can only be set for the future.');
+    return;
+  }
 
-//----- FIRST CREATE THE TASK!
-    await $.ajax({
-        url: `/api/tasks/add`,
-        type: 'POST',
-        data: { 
-            projectID: `${hiddenID}` ,
-            name: `${taskName}`,
-            desc: `${taskDesc}`,
-            dueDate:`${taskDue}`
-        },
-        success: function(result) {
-          //location.reload()
-        },
-        error: function(request, msg, error) {
-          console.log('failed');
-        }
-      });
-
-//------ Query back task ID
-
-let taskID = ''
-
- await $.ajax({
-    url: `/api/tasks/getid`,
+  //----- FIRST CREATE THE TASK!
+  await $.ajax({
+    url: `/api/tasks/add`,
     type: 'POST',
-    data: { 
-        dueDate:`${taskDue}`
+    data: {
+      projectID: `${hiddenID}`,
+      name: `${taskName}`,
+      desc: `${taskDesc}`,
+      dueDate: `${taskDue}`
     },
     success: function(result) {
-        taskID = result
+      //location.reload()
+    },
+    error: function(request, msg, error) {
+      console.log('failed');
+    }
+  });
+
+  //------ Query back task ID
+
+  let taskID = '';
+
+  await $.ajax({
+    url: `/api/tasks/getid`,
+    type: 'POST',
+    data: {
+      dueDate: `${taskDue}`
+    },
+    success: function(result) {
+      taskID = result;
     },
     error: function(request, msg, error) {
       console.log('failed');
@@ -150,45 +176,42 @@ let taskID = ''
 
   //console.log('task id:',taskID[0]['id'])
 
-for (let x in userList){
+  for (let x in userList) {
     //console.log('User:', userList[x])
     await $.ajax({
-        url: `/api/tasks/adduser`,
-        type: 'PUT',
-        data: { 
-            tasksID: `${taskID[0]['id']}`,
-            user: `${userList[x]}`,
-        },
-        success: function(result) {
-            return
-        },
-        error: function(request, msg, error) {
-          console.log('failed');
-        }
-      });
-}
-for (let y in subTaskList){
-    console.log(subTaskList[y]['saveSubtask']['name'])
-    console.log(subTaskList[y]['saveSubtask']['due_date'])
+      url: `/api/tasks/adduser`,
+      type: 'PUT',
+      data: {
+        tasksID: `${taskID[0]['id']}`,
+        user: `${userList[x]}`
+      },
+      success: function(result) {
+        return;
+      },
+      error: function(request, msg, error) {
+        console.log('failed');
+      }
+    });
+  }
+  for (let y in subTaskList) {
+    console.log(subTaskList[y]['saveSubtask']['name']);
+    console.log(subTaskList[y]['saveSubtask']['due_date']);
     await $.ajax({
-        url: `/api/subtasks/add`,
-        type: 'POST',
-        data: { 
-            taskID: `${taskID[0]['id']}`,
-            name: `${subTaskList[y]['saveSubtask']['name']}`,
-            dueDate: `${subTaskList[y]['saveSubtask']['due_date']}`,
-        },
-        success: function(result) {
-            return
-        },
-        error: function(request, msg, error) {
-          console.log('failed');
-        }
-      });
-}
+      url: `/api/subtasks/add`,
+      type: 'POST',
+      data: {
+        taskID: `${taskID[0]['id']}`,
+        name: `${subTaskList[y]['saveSubtask']['name']}`,
+        dueDate: `${subTaskList[y]['saveSubtask']['due_date']}`
+      },
+      success: function(result) {
+        return;
+      },
+      error: function(request, msg, error) {
+        console.log('failed');
+      }
+    });
+  }
 
-
-
-location.reload()
-
-})
+  location.reload();
+});

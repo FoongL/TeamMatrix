@@ -22,7 +22,7 @@ module.exports = express => {
       return next();
     }
     //double check login or signup URL
-    res.redirect('/test');
+    res.redirect('/');
   }
 
   //double check main page URL
@@ -30,13 +30,8 @@ module.exports = express => {
     res.render('home');
   });
 
-  router.get('/projects', (req, res) => {
+  router.get('/userpage', (req, res) => {
     res.render('2', { title: '2', layout: 'project' });
-  });
-
-  //-------------test site:
-  router.get('/test', (req, res) => {
-    res.render('testLogin');
   });
 
   router.get('/testproject', isLoggedIn, (req, res) => {
@@ -113,8 +108,7 @@ module.exports = express => {
       taskAssigned: assigned,
       taskInProgress: inProgress,
       takCompleted: completed,
-      //title: '2',
-      layout: 'projectTest'
+      layout: 'project'
     });
   });
 

@@ -20,10 +20,20 @@ class TaskService {
     return new Promise((res, rej) => {
       let idGrab = this.knex('tasks')
         .select('id')
-        .where({due_date: dueDate, created_by: userID })
+        .where({ due_date: dueDate, created_by: userID })
         .orderBy('due_date', 'DESC')
         .limit('1');
-        idGrab.then(data => {
+      idGrab.then(data => {
+        res(data);
+      });
+    });
+  }
+
+  TaskDetails(taskID) {
+    return new Promise((res, rej) => {
+      let getTask = this.knex('tasks')
+        .select('*').where('id',taskID)
+        getTask.then(data => {
         res(data);
       });
     });
@@ -222,6 +232,18 @@ class TaskService {
         });
       tick.then(err => {
         res('Success');
+      });
+    });
+  }
+
+  listUsers(TaskID) {
+    return new Promise((res, rej) => {
+      let userList = this.knex('users')
+        .join('task_assignment', 'users.id', 'task_assignment.user_id')
+        .select('users.id', 'f_name', 'l_name', 'email')
+        .where('task_assignment.task_id', TaskID);
+        userList.then(data => {
+        res(data);
       });
     });
   }

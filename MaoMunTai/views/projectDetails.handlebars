@@ -1,57 +1,72 @@
-<div class='secretIDHolder' id={{projectID}}></div>
-<div class="content">
-        <div class='ProjectDetails'>
-                <div>
-                        <h2 id='projectName'>{{projectName}}</h2>
-                        <h4 id='projectDescription'>{{projectDesc}}</h4>
+<!-- Main container -->
+<div class="container-nav">
+        <header class="bp-header cf">
+                <div class="dummy-logo">
+                        <h2 class="dummy-heading">Mao Mun Tai</h2>
                 </div>
-                <div>
-                        <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
-                        <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
-                </div>
-        </div>
+        </header>
+        <div>
+                {{> navbar}}
 
-        <div class='mainBody' id='taskManagementDisplay'>
-                <div class='phaseDisplay' id='assignedtasks'>
-                        <div id='assignTaskHeader'>
-                                <h3 class='taskLabel'>Assigned</h3>
-                                <a id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
-                                        + Add Task
-                                </a>
+                <div class='secretIDHolder' id={{projectID}}></div>
+                <div class="content">
+                        <div class='ProjectDetails'>
+                                <div>
+                                        <h2 id='projectName'>{{projectName}}</h2>
+                                        <h4 id='projectDescription'>{{projectDesc}}</h4>
+                                </div>
+                                <div>
+                                        <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
+                                        <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
+                                </div>
+                        </div>
 
-                        </div>
-                        <div class='taskDisplay'>
-                                {{#each taskAssigned}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                        <div class='mainBody' id='taskManagementDisplay'>
+                                <div class='phaseDisplay' id='assignedtasks'>
+                                        <div id='assignTaskHeader'>
+                                                <h3 class='taskLabel'>Assigned</h3>
+                                                <a id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
+                                                        + Add Task
+                                                </a>
+
+                                        </div>
+                                        <div class='taskDisplay'>
+                                                {{#each taskAssigned}}
+                                                <div data-toggle="modal" data-target="#TaskModal" class='assigned task'
+                                                        id={{id}}>
+                                                        <h6 id={{id}}>{{name}}</h6>
+                                                        <p id={{id}}>{{days_left}}</p>
+                                                </div>
+                                                {{/each}}
+                                                <div id='buttSpace'></div>
+                                        </div>
                                 </div>
-                                {{/each}}
-                                <div id='buttSpace'></div>
-                        </div>
-                </div>
-                <div class='phaseDisplay' id='inProgress'>
-                        <h3 class='taskLabel'>In Progress</h3>
-                        <div class='taskDisplay'>
-                                {{#each taskInProgress}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                                <div class='phaseDisplay' id='inProgress'>
+                                        <h3 class='taskLabel'>In Progress</h3>
+                                        <div class='taskDisplay'>
+                                                {{#each taskInProgress}}
+                                                <div data-toggle="modal" data-target="#TaskModal" class='assigned task'
+                                                        id={{id}}>
+                                                        <h6 id={{id}}>{{name}}</h6>
+                                                        <p id={{id}}>{{days_left}}</p>
+                                                </div>
+                                                {{/each}}
+                                                <div id='buttSpace'></div>
+                                        </div>
                                 </div>
-                                {{/each}}
-                                <div id='buttSpace'></div>
-                        </div>
-                </div>
-                <div class='phaseDisplay' id='completedTasks'>
-                        <h3 class='taskLabel'>Completed</h3>
-                        <div class='taskDisplay'>
-                                {{#each takCompleted}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                                <div class='phaseDisplay' id='completedTasks'>
+                                        <h3 class='taskLabel'>Completed</h3>
+                                        <div class='taskDisplay'>
+                                                {{#each takCompleted}}
+                                                <div data-toggle="modal" data-target="#TaskModal" class='assigned task'
+                                                        id={{id}}>
+                                                        <h6 id={{id}}>{{name}}</h6>
+                                                        <p id={{id}}>{{days_left}}</p>
+                                                </div>
+                                                {{/each}}
+                                                <div id='buttSpace'></div>
+                                        </div>
                                 </div>
-                                {{/each}}
-                                <div id='buttSpace'></div>
                         </div>
                 </div>
         </div>
@@ -69,16 +84,16 @@
                         <div class="modal-body">
                                 <form>
                                         <div class="addTaskInput">
-                                                <label>Name:</label>
+                                                <label>Task name:</label>
                                                 <input id='taskName' type="text" required>
                                         </div>
                                         <div class="addTaskInput">
-                                                <label>Description:</label>
+                                                <label>Task description:</label>
                                                 <input id='taskDesc' type="text" required>
                                         </div>
                                         <div class="addTaskInput">
-                                                <label>Due Date:</label>
-                                                <input id= 'taskDue' type="date" required>
+                                                <label>Due date:</label>
+                                                <input id='taskDue' type="date" required>
                                         </div>
                                         {{!-- <div class="addTaskInput">
                                                 <label>Priority:</label>
@@ -95,20 +110,22 @@
                                         </div> --}}
                                         <div id="inTheProject"></div>
                                         <div class="addTaskInput">
-                                                <label>Assign Team Members:</label>
+                                                <label>Add teammates:</label>
                                                 <input id='userSearch' type="text" required>
                                         </div>
                                         <div id="nameList"></div>
                                 </form>
                                 <div id='subtaskButt'>
 
-                                        <button id='subButton' type="button" class="btn btn-secondary" data-toggle="modal"
-                                                data-target="#addSubTaskModal">Add Sub-task</button>
-                                         <div id='subButt'></div>
+                                        <button id='subButton' type="button" class="btn btn-secondary"
+                                                data-toggle="modal" data-target="#addSubTaskModal">Add
+                                                subtask</button>
+                                        <div id='subButt'></div>
                                 </div>
                         </div>
                         <div class="modal-footer">
-                                <button id='taskSave' type="button" class="btn btn-primary">Save changes</button>
+                                <button id='taskSave' type="button" class="btn btn-primary">Save
+                                        changes</button>
                         </div>
                 </div>
         </div>
@@ -138,7 +155,48 @@
 
                         </div>
                         <div class="modal-footer">
-                                <button id='subSave' type="button" class="btn btn-primary">Save Subtask</button>
+                                <button id='subSave' type="button" class="btn btn-primary">Save
+                                        subtask</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<div class="modal fade" id="TaskModal">
+        <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="TaskTitle">Task Detail</h5>
+                                <div id='startButton'>
+                                        <label>Start project:</label>
+                                        <input type="checkbox" id="switch" /><label id="switchLabel"
+                                                for="switch">Toggle</label>
+                                </div>
+                        </div>
+                        <div id='TaskModalBody' class="modal-body">
+                                <div id='TaskModalBodyBreak'>
+                                        <h6>Description:</h6>
+                                        <p id='TaskModalDescription'></p>
+                                        <div id='subtaskCheck'>
+
+                                        </div>
+                                        <div id='TaskModalDetails'>
+                                                <div id='TaskMemberList'>
+
+                                                </div>
+                                                <div id='TaskEditList'>
+
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="modal-footer">
+                                <button id='' type="button" class="btn btn-primary">Save
+                                        changes</button>
                         </div>
                 </div>
         </div>
