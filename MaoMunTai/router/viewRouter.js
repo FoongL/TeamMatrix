@@ -44,6 +44,9 @@ module.exports = express => {
     var curTime = new Date();
     curTime = new Date(curTime.toISOString().slice(0, 10) + ' 00:00:00+08');
     let user = req.session.passport.user;
+  
+    let projectlist = await projectService.listProject(user['id'])
+  
     let projects = 31;
     let projectDetails = await projectService.projectDetails(projects);
     let assigned = await taskService.listTask(projects, 1);
@@ -100,6 +103,7 @@ module.exports = express => {
       ', ' +
       dueDate.getFullYear();
     res.render('projectDetails', {
+      projectList : projectlist,
       projectID: projects,
       projectName: projectDetails[0]['name'],
       projectDesc: projectDetails[0]['desc'],

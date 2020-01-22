@@ -25,7 +25,8 @@
                                 <div class='phaseDisplay' id='assignedtasks'>
                                         <div id='assignTaskHeader'>
                                                 <h3 class='taskLabel'>Assigned</h3>
-                                                <a id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
+                                                <a class='textLink' id='addTaskButton' data-toggle="modal"
+                                                        data-target="#addTaskModal">
                                                         + Add Task
                                                 </a>
 
@@ -178,25 +179,213 @@
                         </div>
                         <div id='TaskModalBody' class="modal-body">
                                 <div id='TaskModalBodyBreak'>
+                                        <div id='dateDisp'>
+                                                <h6>Due date:</h6>
+
+                                                <p id='TaskDue'></p>
+
+                                        </div>
                                         <h6>Description:</h6>
                                         <p id='TaskModalDescription'></p>
                                         <div id='subtaskCheck'>
+                                                <h6>Checklist: </h6>
+                                                <div id='checkList'>
+                                                        <label class="checker">One
+                                                                <input type="checkbox">
+                                                                <span class="checkmark"></span>
+                                                        </label>
+                                                </div>
 
                                         </div>
-                                        <div id='TaskModalDetails'>
-                                                <div id='TaskMemberList'>
-
+                                        <a class='textLink' id='addTaskButton' data-toggle="modal" data-target="#addToChecklist">
+                                                + Add subtask
+                                        </a>
+                                </div>
+                                <div id='TaskModalDetails'>
+                                        <div id='TaskMemberList'>
+                                                <h6>Teammates: </h6>
+                                                <div id='teamList'>
+                                                        <p>Foong Leung, leung.foong@gmail.com</p>
                                                 </div>
+                                                <a class='textLink' id='addTaskButton' data-toggle="modal"
+                                                        data-target="#addTeaMate">
+                                                        + Add teammate
+                                                </a>
                                                 <div id='TaskEditList'>
+                                                        <h6>Settings: </h6>
+                                                        <a id='taskNameEdit' class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskName">Edit name</a> <br>
+                                                        <a class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskDesc">Edit description</a><br>
+                                                        <a class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskDue">Edit due date</a><br>
+                                                        <a class='textLink deleteWarn' data-toggle="modal"
+                                                                data-target="#deleteTask">Delete task</a>
+
 
                                                 </div>
+
                                         </div>
                                 </div>
                         </div>
 
+
+
                         <div class="modal-footer">
                                 <button id='' type="button" class="btn btn-primary">Save
                                         changes</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskName">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task name</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">Enter new name:</label>
+                                                <input id='newtaskName' type="text" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='nameChange' type="button" class="btn btn-secondary"
+                                        >Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskDesc">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task description</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">Enter new description:</label>
+                                                <input id='#' type="text" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='descChange' type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskDue">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task due date:</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Enter new due date:</label>
+                                                <input id='#' type="date" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='dueChange' type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="deleteTask">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Confirm delete?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <button id='taskDelete' type="button" class="btn btn-danger">YES! DELETE!</button>
+                        </div>
+
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="modal fade" id="addToChecklist">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Subtask</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Name:</label>
+                                                <input id='#' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Due Date:</label>
+                                                <input id='#' type="date" required>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='addSub' type="button" class="btn btn-primary">Save
+                                        subtask</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="modal fade" id="addTeaMate">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add teammates</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Search for your teammates:</label>
+                                                <input id='#' type="text" required>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='addMem' type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+
                         </div>
                 </div>
         </div>

@@ -7,6 +7,8 @@ $('#switch').on('click', function(event) {
 });
 
 $('.assigned').on('click', async function(event) {
+  $('#checkList').empty();
+  $('#teamList').empty();
   var TaskId = $(event.target).attr('id');
 
   //--- data grab to populate the modal
@@ -23,8 +25,8 @@ $('.assigned').on('click', async function(event) {
       taskID: `${TaskId}`
     },
     success: function(result) {
-        //console.log(result)
-        taskDetails = result;
+      //console.log(result)
+      taskDetails = result;
     },
     error: function(request, msg, error) {
       console.log('failed');
@@ -38,7 +40,7 @@ $('.assigned').on('click', async function(event) {
       taskID: `${TaskId}`
     },
     success: function(result) {
-        //console.log(result)
+      //console.log(result)
       subtasks = result;
     },
     error: function(request, msg, error) {
@@ -54,33 +56,85 @@ $('.assigned').on('click', async function(event) {
       taskID: `${TaskId}`
     },
     success: function(result) {
-        //console.log(result)
-        taskMembers = result;
+      //console.log(result)
+      taskMembers = result;
     },
     error: function(request, msg, error) {
       console.log('failed');
     }
   });
-  
-//---- Rendering out Task Detail information
-taskName = taskDetails[0]['name']
-taskDesc = taskDetails[0]['desc']
-taskDue = taskDetails[0]['due_date']
 
-console.log(taskName)
-console.log(taskDesc)
-console.log(taskDue)
+  //---- Rendering out Task Detail information
+  taskName = taskDetails[0]['name'];
+  taskDesc = taskDetails[0]['desc'];
+  taskDue = new Date(taskDetails[0]['due_date']);
+  let months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+  let dateDue =
+    taskDue.getDate() +
+    ' ' +
+    months[taskDue.getMonth()] +
+    ', ' +
+    taskDue.getFullYear();
+  $('#TaskTitle').html(`${taskName}`);
+  $('#TaskModalDescription').html(`${taskDesc}`);
+  $('#TaskDue').html(`${dateDue}`);
 
-$('#TaskTitle').html(`${taskName}`)
-$('#TaskModalDescription').html(`${taskDesc}`)
+  //---- Rendering out checklist
 
+  for (let x in subtasks) {
+    if (subtasks[x]['complete_date'] == null) {
+      $('#checkList')
+        .append(` <label id="${subtasks[x]['id']}" class="checker">${subtasks[x]['name']}
+    <input id="${subtasks[x]['id']}"type="checkbox">
+    <span id="${subtasks[x]['id']}" class="checkmark"></span>
+</label>`);
+    } else {
+      $('#checkList')
+        .append(` <label id="${subtasks[x]['id']}" class="checker">${subtasks[x]['name']}
+        <input id="${subtasks[x]['id']}"type="checkbox" checked="checked">
+        <span id="${subtasks[x]['id']}" class="checkmark"></span>
+    </label>`);
+    }
+  }
 
+  //---- Rendering out task members
 
+  for (let y in taskMembers) {
+    $('#teamList').append(
+      `<ul>${taskMembers[y]['f_name']} ${taskMembers[y]['l_name']}, ${taskMembers[y]['email']}</ul>`
+    );
+  }
 
+  $('#taskNameEdit').on('click', function(event) {
+    $('#newtaskName').val('');
+  });
 
+  $('#nameChange').on('click', async function(event) {
+    if ($('#newtaskName').val() == '') {
+      alert('Need a valid name to replace existing name!');
+      return;
+    }
+    
 
+    let newName = $('#newtaskName').val();
+    console.log(TaskId)
+    console.log(newName)
+    await $.ajax({
+      url: `/api/tasks/amendname`,
+      type: 'PUT',
+      data: {
+        taskID: `${TaskId}`,
+        name: `${newName}`
+      },
+      success: function(result) {
+        console.log('name changed!');
+      },
+      error: function(request, msg, error) {
+        console.log('failed');
+      }
+    });
+    $('#TaskTitle').html(`${newName}`);
 
-
-
-
+    $('#editTaskName').modal('hide');
+  });
 });
