@@ -90,7 +90,7 @@ class TaskRouter {
 
   amendName(req, res){
     return this.taskService
-      .amendName(req.body.tasksID, req.body.name)
+      .amendName(req.body.taskID, req.body.name)
       .then(notes => res.send('task name has been changed!'))
       .catch(err => res.status(500).json(err));
   }

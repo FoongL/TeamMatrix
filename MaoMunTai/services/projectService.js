@@ -3,8 +3,7 @@ const fs = require('fs');
 class ProjectService {
   constructor(knex) {
     this.knex = knex;
-    //this.notes = {};
-    //this.listProjectPromise = this.listProject();
+
   }
   listProject(userID) {
     return new Promise((res, rej) => {
@@ -18,7 +17,7 @@ class ProjectService {
           'projects.due_date'
         )
         .where('users.id', userID)
-        .orderBy('projects.created_at');
+        .orderBy('projects.due_date');
       listKnex.then(rows => {
         res(rows);
       });

@@ -106,6 +106,8 @@ class TaskService {
   }
 
   amendName(TaskID, name) {
+    console.log(TaskID)
+    console.log(name)
     return new Promise((res, rej) => {
       let amend = this.knex('tasks')
         .where('id', TaskID)
