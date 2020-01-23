@@ -548,6 +548,7 @@ a:hover {
 
 .content--loading {
 	background: url(/assets/images/loading.svg) no-repeat 50% 50%;
+	margin-left: 400px;
 }
 
 .products {
@@ -574,7 +575,6 @@ a:hover {
 .info {
 	font-size: 1.1em;
 	font-weight: bold;
-	padding: 20vh 1em 0;
 	text-align: center;
 	color: #47484c;
 }
@@ -745,4 +745,16 @@ margin-left: 5px;
 	}
   }
 
-  
+.position-bg{
+display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 0px;
+	grid-auto-rows: minmax(100px, auto);
+	height: 100vh;
+  }
+
+ .background-mao{
+	grid-column: 2;
+	grid-row: 2;
+margin-left: 5px;
+ } 
