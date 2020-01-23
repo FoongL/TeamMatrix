@@ -1,4 +1,10 @@
-<button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+<div class="container-nav">
+    <header class="bp-header cf">
+        <div class="dummy-logo">
+            <h2 class="dummy-heading">Mao Mun Tai</h2>
+        </div>
+    </header>
+    <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
     <nav id="ml-menu" class="menu">
         <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
         <div class="menu__wrap">
@@ -13,15 +19,30 @@
                 aria-label="Projects">
                 <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Create New Project</a></li>
 
-                {{#each projectName}}
+                {{#each project}}
 
                 {{/each}}
-                
+
             </ul>
             <!-- Submenu 2 -->
             <ul data-menu="submenu-2" id="submenu-2" class="menu__level" tabindex="-1" role="menu"
                 aria-label="Dashboard">
                 <li class="menu__item" role="menuitem"><a class="menu__link" href="#">History</a></li>
-                
             </ul>
+            <div class="wrapper-buttons">
+                <div class="position-mao">
+                    <div class="button" id="button-5">
+                        <div id="translate"></div>
+                        <a href="#">Mao Mode</a>
+                    </div>
+                </div>
+                <div class="position-logout">
+                    <div class="button" id="button-7">
+                        <div id="dub-arrow"><img src="/assets/images/logout-icon.png" alt="" /></div>
+                        <a href="#">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
+</div>
