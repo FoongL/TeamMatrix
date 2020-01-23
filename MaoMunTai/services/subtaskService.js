@@ -7,18 +7,34 @@ class SubtaskService {
     //this.listProjectPromise = this.listProject();
   }
   listSubtask(TaskID) {
-      return new Promise((res, rej) => {
-        let listKnex = this.knex('sub_task')
-          .join('tasks', 'sub_task.task_id', 'tasks.id')
-          .select('sub_task.id', 'sub_task.name', 'sub_task.due_date','sub_task.completed_date')
-          .where('tasks.id', TaskID)
-          .orderBy('sub_task.due_date');
-        listKnex.then(rows => {
-          res(rows);
-        });
+    return new Promise((res, rej) => {
+      let listKnex = this.knex('sub_task')
+        .join('tasks', 'sub_task.task_id', 'tasks.id')
+        .select(
+          'sub_task.id',
+          'sub_task.name',
+          'sub_task.due_date',
+          'sub_task.completed_date'
+        )
+        .where('tasks.id', TaskID)
+        .orderBy('sub_task.due_date');
+      listKnex.then(rows => {
+        res(rows);
       });
+    });
   }
-
+  getSubId(TaskID, name) {
+    return new Promise((res, rej) => {
+      let listKnex = this.knex('sub_task')
+        .select('id')
+        .where({ task_id: TaskID, name: name })
+        .orderBy('created_at')
+        .limit('1');
+      listKnex.then(rows => {
+        res(rows);
+      });
+    });
+  }
   addSubtask(taskID, name, dueDate) {
     return new Promise((res, rej) => {
       let creation = this.knex
@@ -85,8 +101,8 @@ class SubtaskService {
   markComplete(subtaskID) {
     return new Promise((res, rej) => {
       var curTime = new Date();
-      curTime =curTime.toISOString().slice(0, 10)+' 00:00:00+08';
-      console.log(curTime)
+      curTime = curTime.toISOString().slice(0, 10) + ' 00:00:00+08';
+      console.log(curTime);
       console.log('id:', subtaskID);
       let tick = this.knex('sub_task')
         .where('id', subtaskID)
@@ -102,12 +118,22 @@ class SubtaskService {
   markUnComplete(subtaskID) {
     return new Promise((res, rej) => {
       let untick = this.knex('sub_task')
-      .where('id', subtaskID)
-      .update({
-        completed_date: null
-      });
+        .where('id', subtaskID)
+        .update({
+          completed_date: null
+        });
       untick.then(err => {
         res('Success');
+      });
+    });
+  }
+  countUnComplete(taskID) {
+    return new Promise((res, rej) => {
+      let counting = this.knex('sub_task')
+        .where({ task_id: taskID, completed_date: null })
+        .count('*');
+        counting.then(data => {
+        res(data);
       });
     });
   }

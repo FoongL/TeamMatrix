@@ -138,6 +138,11 @@ $('#taskSave').on('click', async function(event) {
     return;
   }
 
+  if (userList.length ==0){
+    alert('Must have at least one person assigned to task to initiate!');
+    return;
+  }
+
   //----- FIRST CREATE THE TASK!
   await $.ajax({
     url: `/api/tasks/add`,

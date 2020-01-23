@@ -25,6 +25,12 @@ class TaskRouter {
     router.put('/phasechange', this.phaseChange.bind(this));
     router.put('/amendduedate', this.amendDuedate.bind(this));
     router.put('/taskcomplete', this.markCompleted.bind(this));
+    router.put('/phasecheck', this.phaseCheck.bind(this));
+
+
+
+
+    
     return router;
   }
   addTask(req, res) {
@@ -70,7 +76,7 @@ class TaskRouter {
 
   deleteTask(req, res) {
     return this.taskService
-      .addTask(req.body.tasksID)
+      .deleteTask(req.body.taskID)
       .then(notes => res.send('Deleted tasks and related stuff'))
       .catch(err => res.status(500).json(err));
   }
@@ -97,7 +103,7 @@ class TaskRouter {
 
   amendDesc(req, res){
     return this.taskService
-      .amendDesc(req.body.tasksID, req.body.description)
+      .amendDesc(req.body.taskID, req.body.description)
       .then(notes => res.send('task description has been changed!'))
       .catch(err => res.status(500).json(err));
   }
@@ -111,7 +117,7 @@ class TaskRouter {
 
   startProject(req, res){
     return this.taskService
-      .startProject(req.body.tasksID)
+      .startProject(req.body.taskID)
       .then(notes => res.send('Task has been started or un-started!'))
       .catch(err => res.status(500).json(err));
   }
@@ -125,25 +131,30 @@ class TaskRouter {
 
   phaseChange(req, res){
     return this.taskService
-      .phaseChange(req.body.tasksID, req.body.phase)
+      .phaseChange(req.body.taskID, req.body.phase)
       .then(notes => res.send('Task phase has changed'))
       .catch(err => res.status(500).json(err));
   }
 
  amendDuedate(req, res){
     return this.taskService
-      .amendDuedate(req.body.tasksID, req.body.dueDate)
+      .amendDuedate(req.body.taskID, req.body.dueDate)
       .then(notes => res.send('Task due date has been amended'))
       .catch(err => res.status(500).json(err));
   }
 
   markCompleted(req, res){
     return this.taskService
-      .markComplete(req.body.tasksID)
+      .markComplete(req.body.taskID)
       .then(notes => res.send('Task has been completed!'))
       .catch(err => res.status(500).json(err));
   }
-
+  phaseCheck(req, res){
+    return this.taskService
+      .phaseCheck(req.body.taskID)
+      .then(data => res.json(data))
+      .catch(err => res.status(500).json(err));
+  }
   
   
 

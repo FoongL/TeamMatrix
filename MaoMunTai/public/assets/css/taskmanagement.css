@@ -112,7 +112,7 @@ h6 {
   display: inline-block;
   padding-top: 20px;
   padding-right: 10px;
-  color: rgb(97, 97, 97) !important;
+  color: rgb(136, 111, 111) !important;
   cursor: pointer;
 }
 
@@ -170,10 +170,34 @@ h6 {
 }
 
 #nameList {
+  display:flex;
+  flex-direction:row;
+  color: rgb(4, 43, 102);
   height: 40px;
   overflow: scroll;
 }
 
+#nameList .clickable{
+  margin-top: 5px;
+  margin-right: 13px;
+  display: inline-block;
+}
+#nameList .clickable:hover{
+  color: rgb(13, 88, 201);
+  transition: 0.3s;
+}
+#nameList .clickable:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: rgb(13, 88, 201);
+  transition: 300ms;
+}
+
+#nameList .clickable:hover:after {
+  width: 100%;
+}
 .clickable {
   cursor: pointer;
   color: rgb(63, 63, 63);
@@ -286,10 +310,28 @@ text-decoration: none;
   width: 100%;
   height: 30%;
 }
-
-/* #TaskEditList{
-  border: solid rgb(182, 182, 182) 1px;
+/* #subtaskCheck{
+  max-height: 37vh;
 } */
+#checkList{
+  max-height: 35vh;
+  overflow:scroll;
+}
+
+.trash:hover{
+  color: rgb(145, 76, 76);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.checkDiv{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+
+
+
 
 /* for the start project toggle */
 #startButton {
@@ -418,4 +460,41 @@ text-decoration: none;
 }
 
 
+/* add user to old task settings */
+#AddToTask {
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: auto;
+}
 
+#addMemList {
+  display:flex;
+  flex-direction:row;
+  color: rgb(4, 43, 102);
+  height: 40px;
+  overflow: scroll;
+}
+
+#addMemList .clickable{
+  margin-top: 5px;
+  margin-right: 13px;
+  display: inline-block;
+}
+#addMemList .clickable:hover{
+  color: rgb(13, 88, 201);
+  transition: 0.3s;
+}
+#addMemList .clickable:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: rgb(13, 88, 201);
+  transition: 300ms;
+}
+
+#addMemList .clickable:hover:after {
+  width: 100%;
+}

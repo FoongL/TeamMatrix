@@ -150,6 +150,7 @@ class TaskService {
       let amend = this.knex('tasks')
         .where('id', TaskID)
         .update({
+          phase:'2',
           started: 'True'
         });
       amend.then(err => {
@@ -230,7 +231,8 @@ class TaskService {
       let tick = this.knex('tasks')
         .where('id', TaskID)
         .update({
-          completed_date: curTime
+          completed_date: curTime,
+          phase: '3'
         });
       tick.then(err => {
         res('Success');
@@ -245,6 +247,16 @@ class TaskService {
         .select('users.id', 'f_name', 'l_name', 'email')
         .where('task_assignment.task_id', TaskID);
         userList.then(data => {
+        res(data);
+      });
+    });
+  }
+  phaseCheck(TaskID) {
+    return new Promise((res, rej) => {
+      let phaseCheck = this.knex('tasks')
+        .select('phase')
+        .where('id', TaskID);
+        phaseCheck.then(data => {
         res(data);
       });
     });
