@@ -3,7 +3,6 @@ const fs = require('fs');
 class ProjectService {
   constructor(knex) {
     this.knex = knex;
-
   }
   listProject(userID) {
     return new Promise((res, rej) => {
@@ -46,15 +45,15 @@ class ProjectService {
     });
   }
 
-  addProject(userID, name, desc, dueDate) {
+  addProject(userID, name, dueDate) {
     return new Promise((res, rej) => {
       let creation = this.knex
-        .insert({ name: name, desc: desc, due_date: dueDate })
+        .insert({ name: name, due_date: dueDate })
         .into('projects');
       let projID = this.knex
         .select('id')
         .from('projects')
-        .where({ name: name, desc: desc, due_date: dueDate })
+        .where({ name: name, due_date: dueDate })
         .orderBy('created_at', 'desc')
         .limit('1');
       creation
@@ -78,13 +77,15 @@ class ProjectService {
   }
 
   amendName(projectID, name) {
-    let amend = this.knex('projects')
-      .where('id', projectID)
-      .update({
-        name: name
+    return new Promise((res, rej) => {
+      let amend = this.knex('projects')
+        .where('id', projectID)
+        .update({
+          name: name
+        });
+      amend.then(err => {
+        res('Success');
       });
-    amend.then(err => {
-      res('Success');
     });
   }
 
@@ -100,13 +101,15 @@ class ProjectService {
   }
 
   amendDuedate(projectID, dueDate) {
-    let amend = this.knex('projects')
-      .where('id', projectID)
-      .update({
-        due_date: dueDate
+    return new Promise((res, rej) => {
+      let amend = this.knex('projects')
+        .where('id', projectID)
+        .update({
+          due_date: dueDate
+        });
+      amend.then(err => {
+        res('Success');
       });
-    amend.then(err => {
-      res('Success');
     });
   }
 

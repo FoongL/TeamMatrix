@@ -15,6 +15,10 @@ class ProjectRouter {
     router.post('/add', this.addproject.bind(this));
     router.post('/adduser', this.adduser.bind(this));
     router.delete('/remove', this.deleteProject.bind(this));
+    router.post('/amendname', this.amendProjName.bind(this));
+    router.post('/amenddate', this.amendProjDue.bind(this));
+    
+    
     return router;
   }
   listprojects(req, res) {
@@ -31,7 +35,6 @@ class ProjectRouter {
       .addProject(
         req.body.userId,
         req.body.name,
-        req.body.desc,
         req.body.dueDate
       )
       .then(notes => res.send('It works!'))
@@ -61,6 +64,26 @@ class ProjectRouter {
     return this.projectService
       .deleteProject(
         req.body.projectId,
+      )
+      .then(notes => res.send('/userpage'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  amendProjName(req, res) {
+    return this.projectService
+      .amendName(
+        req.body.projectId,
+        req.body.name,
+      )
+      .then(notes => res.send('managed to clear the whole project'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  amendProjDue(req, res) {
+    return this.projectService
+      .amendDuedate(
+        req.body.projectId,
+        req.body.dueDate,
       )
       .then(notes => res.send('managed to clear the whole project'))
       .catch(err => res.status(500).json(err));
