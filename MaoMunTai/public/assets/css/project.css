@@ -665,6 +665,9 @@ margin-left: 5px;
 	margin-bottom: 20px;
 	margin-left: 5px;
  }
+ .logout{
+	 z-index:3;
+ }
 
 .button {
 	display: inline-flex;

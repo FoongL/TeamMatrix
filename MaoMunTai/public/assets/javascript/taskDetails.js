@@ -581,10 +581,6 @@ $('#taskDelete').click(async function(event){
 
 })
 
-
-
-
-
 });
 
 //---- closing dialog box with done button only
@@ -592,7 +588,3 @@ $('#closeTaskDetail').on('click', function(event) {
   location.reload();
 });
 
-// ` <div id="${subtasks[x]['id']}" class='checkDiv'><div><label id="${subtasks[x]['id']}" class="checker">${subtasks[x]['name']}
-//     <input id="${subtasks[x]['id']}"type="checkbox">
-//     <span id="${subtasks[x]['id']}" class="checkmark"></span>
-// </label></div><i class="far fa-trash-alt trash"></i></div>`
