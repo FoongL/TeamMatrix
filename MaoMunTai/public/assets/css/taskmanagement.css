@@ -468,7 +468,7 @@ text-decoration: none;
 
 /* Style the checkmark/indicator */
 .checker .checkmark:after {
-  left: px;
+  left: 9px;
   top: 7px;
   width: 5px;
   height: 10px;
