@@ -32,6 +32,25 @@ class ProjectService {
       });
     });
   }
+  getProjId(user, name, dueDate) {
+    return new Promise((res, rej) => {
+      let listKnex = this.knex('projects')
+        .select('id',"created_at")
+        .where({name:name, due_date:dueDate}).orderBy('created_at','DESC').limit('1');
+      listKnex.then(rows => {
+        res(rows);
+      });
+    });
+  }
+  listAllUsers() {
+    return new Promise((res, rej) => {
+      let listKnex = this.knex('users')
+        .select('*')
+      listKnex.then(rows => {
+        res(rows);
+      });
+    });
+  }
 
   projectUsers(projectID) {
     return new Promise((res, rej) => {

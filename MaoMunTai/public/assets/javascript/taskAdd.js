@@ -28,8 +28,7 @@ addTaskButton.on('click', function() {
 // search function based on who's in it (using REGEX to find matches)
 search.on('input', function() {
   let searchText = search.val();
-  //console.log(searchText);
-  //match users
+
   let matches = userList.filter(user => {
     const regex = new RegExp(`^${searchText}`, 'gi');
     return (
