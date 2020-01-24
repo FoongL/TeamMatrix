@@ -11,7 +11,9 @@ class ProjectRouter {
   router() {
     let router = express.Router();
     router.get('/', this.listprojects.bind(this));
+    router.post('/getusers', this.getusers.bind(this))
     router.post('/add', this.addproject.bind(this));
+    router.post('/adduser', this.adduser.bind(this));
     router.delete('/remove', this.deleteProject.bind(this));
     return router;
   }
@@ -33,6 +35,25 @@ class ProjectRouter {
         req.body.dueDate
       )
       .then(notes => res.send('It works!'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  getusers(req, res){
+    return this.projectService
+    .projectUsers(
+      req.body.projectId
+    )
+    .then(users => res.json(users))
+    .catch(err => res.status(500).json(err));
+  }
+
+  adduser(req, res) {
+    return this.projectService
+      .addUser(
+        req.body.projectId,
+        req.body.userId,
+      )
+      .then(notes => res.send('added user to project'))
       .catch(err => res.status(500).json(err));
   }
 

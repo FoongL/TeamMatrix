@@ -3,8 +3,7 @@ const fs = require('fs');
 class ProjectService {
   constructor(knex) {
     this.knex = knex;
-    //this.notes = {};
-    //this.listProjectPromise = this.listProject();
+
   }
   listProject(userID) {
     return new Promise((res, rej) => {
@@ -18,7 +17,7 @@ class ProjectService {
           'projects.due_date'
         )
         .where('users.id', userID)
-        .orderBy('projects.created_at');
+        .orderBy('projects.due_date');
       listKnex.then(rows => {
         res(rows);
       });
@@ -30,6 +29,18 @@ class ProjectService {
         .select('*')
         .where('id', projectID);
       listKnex.then(rows => {
+        res(rows);
+      });
+    });
+  }
+
+  projectUsers(projectID) {
+    return new Promise((res, rej) => {
+      let listUsers = this.knex('users')
+        .join('user_project', 'users.id', 'user_project.user_id')
+        .select('users.id', 'f_name', 'l_name', 'email')
+        .where('user_project.project_id', projectID);
+      listUsers.then(rows => {
         res(rows);
       });
     });
@@ -160,62 +171,69 @@ class ProjectService {
     });
   }
   addUser(projectID, user) {
-    let addUser = this.knex
-      .insert({
-        user_id: user,
-        project_id: projectID
-      })
-      .into('user_project');
-    addUser.then(err => {
-      res('Success');
+    return new Promise((res, rej) => {
+      let addUser = this.knex
+        .insert({
+          user_id: user,
+          project_id: projectID
+        })
+        .into('user_project');
+      addUser.then(err => {
+        res('Success');
+      });
     });
   }
+
   removeUser(projectID, user) {
-    let remUser = this.knex('user_project')
-      .where({
-        project_id: projectID,
-        user_id: user
-      })
-      .del();
-    remUser.then(err => {
-      res('Success');
+    return new Promise((res, rej) => {
+      let remUser = this.knex('user_project')
+        .where({
+          project_id: projectID,
+          user_id: user
+        })
+        .del();
+      remUser.then(err => {
+        res('Success');
+      });
     });
   }
 
   checkAdmin(projectID) {
-    let adminCheck = this.knex
-      .select('id')
-      .from('user_project')
-      .where({
-        project_id: 'projectID',
-        admin: 'true'
-      });
-    adminCheck
-      .then(data => {
-        if (data[0].length == 0) {
-          let oldestUser = this.knex
-            .select('id')
-            .from('user_project')
-            .where({
-              project_id: 'projectID'
-            })
-            .orderBy('created_at')
-            .limit('1');
+    return new Promise((res, rej) => {
+      let adminCheck = this.knex
+        .select('id')
+        .from('user_project')
+        .where({
+          project_id: 'projectID',
+          admin: 'true'
+        });
+      adminCheck
+        .then(data => {
+          if (data[0].length == 0) {
+            let oldestUser = this.knex
+              .select('id')
+              .from('user_project')
+              .where({
+                project_id: 'projectID'
+              })
+              .orderBy('created_at')
+              .limit('1');
 
-          oldestUser.then(newUser => {
-            let newAdmin = newUser[0]['id'];
-            return this.knex('user_project')
-              .where('id', newAdmin)
-              .update({
-                admin: true
-              });
-          });
-        }
-      })
+            oldestUser.then(newUser => {
+              let newAdmin = newUser[0]['id'];
+              return this.knex('user_project')
+                .where('id', newAdmin)
+                .update({
+                  admin: true
+                });
+            });
+          }
+        })
 
-      .then(err => {
-        res('Success');
-      });
+        .then(err => {
+          res('Success');
+        });
+    });
   }
 }
 

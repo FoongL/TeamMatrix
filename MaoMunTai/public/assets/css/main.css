@@ -2,6 +2,20 @@ body{
     font-family: 'Acme', sans-serif;
 }
 
+.main-grid{
+    display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 0px;
+        grid-auto-rows: minmax(100px, auto);
+        height: 100vh;
+      }
+    
+.login-grid{
+        grid-column: 3;
+        grid-row: 2;
+     } 
+
 .main-cover{
     background-image: url(/assets/images/mao-cover.jpg);
     height: 100vh;
@@ -11,6 +25,10 @@ body{
     display: table;
     width: 100%;
     position: relative;
+}
+
+.name{
+    font-size: 50px;
 }
 
 .main-login-butt{
@@ -30,51 +48,150 @@ body{
      
 }
 
+.main-butt-text{
+    font-family: 'Acme', sans-serif;
+    font-size:17px;
+    border-width: 5px;
+    border-color: #000000;
+    margin-left: 15px;
+}
+
+.main-butt-text:hover{
+    color: #A60E01;
+    background: #F7C007;
+}
+
 .ink-text{
     color: #ccc;
+    margin-right: 10px;
 }
+
 
 .facebook{
     background-image: url(/assets/images/facebook.png);
     width: 133px;
     height: 34px;
-    margin: 40px;
+    margin: 10px;
 
 }
 
-.gmail{
+.zocial.googleplus{
     background-image: url(/assests/images/gmail.png);
-    width: 100px;
-    height: 100px;
-    margin: 
+    margin: 10px;
 }
 
+/* Learn More */
+
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+    height: 0%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 5; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  }
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 15%; /* 15% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 20px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+  }
+
+/* The navigation links inside the overlay */
+.about{
+    padding: 8px;
+    text-decoration: none;
+    color: #ccc;
+    display: block; /* Display block instead of inline */
+  }
+
+.features{
+    padding: 8px;
+    text-decoration: none;
+    color: #ccc;
+    display: block; /* Display block instead of inline */
+}
+
+  .about-main-grid{
+    display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 40px;
+        grid-auto-rows: minmax(100px, auto);
+        height: 100vh;
+      }
+.about-sub-grid{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.features-sub-grid{
+    grid-column: 3;
+    grid-row:1;
+}
+
+  /* Position the close button (top right corner) */
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: #eee;
+    text-decoration: #eee;
+  }
+
+.sticky{
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+      font-size: 40px;
+      top: 15px;
+      right: 35px;
+    }
+  }
+
+
+/* Menu */
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-    background-color: #eee;
-    color: #444;
+    font-family: 'Acme', sans-serif;
+    background-color: #F7C007;
+    color: #A60E01;
     cursor: pointer;
-    padding: 18px;
-    width: 90%;
-    border: none;
+    padding: 10px;
+    width: 100%;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: #A60E01;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: 24px;
     align-content: center;
   }
 
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .collapsible:hover {
-    background-color: #ccc;
+    background-color: #A60E01;
+    color: #F7C007;
+    border-color: #F7C007;
   }
   .collapsible:after {
     content: '\02795'; /* Unicode character for "plus" sign (+) */
-    font-size: 13px;
-    color: white;
-    float: right;
-    margin-left: 5px;
+    font-size: 15px;
+    margin-left: 15px;
   }
   
   .active:after {
@@ -82,17 +199,21 @@ body{
   }
   .content {
     padding: 0 18px;
-    background-color: white;
+    background-color: transparent;
     max-height: 0;
-    overflow: hidden;
+    overflow: scroll;
     transition: max-height 0.2s ease-out;
-    width: 86.4%;
   }
 
   input[type=text] {
     border: 2px solid #000000;
     border-radius: 4px;
-    width: 200px;
+    width: 300px;
+  }
+  input[type=password]{
+    border: 2px solid #000000;
+    border-radius: 4px;
+    width: 300px;
   }
 
   .full-menu {
@@ -102,33 +223,91 @@ body{
     z-index: 3;
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
     background-size: cover;
     opacity: 0;
     visibility: hidden;   
-    transition: opacity 0.3s 0s, visibility 0s 0.3s;
+    transition: opacity 0.3s 0s visibility 0s 0.3s;
 }
 
 /* Full Menu */
 
+.main-log-grid{
+    display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 50px;
+        grid-auto-rows: minmax(100px, auto);
+        height: 100vh;
+      }
+
+.email-log-grid{
+grid-column: 2;
+grid-row: 1;
+display: block;
+}
+
+.sub-main-grid{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+    grid-auto-rows: minmax(40px, auto);
+    margin-top: 15px;
+}
+
+.grid-1-1{
+grid-column: 1;
+grid-row: 1;
+margin-bottom: 15px;
+}
+.grid-1-2{
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 20px;
+    }
+
+.grid-1-3{
+    grid-column: 1;
+    grid-row: 3;
+    margin-bottom: 20px;
+}    
+
+.grid-1-4{
+    grid-column: 1;
+    grid-row: 4;
+    margin-bottom: 20px;
+}
+
+.social-log-grid{
+    grid-column: 2;
+    grid-row: 2;
+display: block;
+}
+
+.signup-grid{
+    grid-column: 2;
+    grid-row: 3;
+    display: block;
+}
+
 .full-menu .modal-close {
     /* 'X' icon */
-    position: absolute;
-    z-index: 1;
+    grid-column: 3;
+    position: sticky;
+    z-index: 5;
     top: 0;
     right: 0;
     padding: 0px;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    background:rgba(0, 0, 0, 0.3) url(/assets/images/exit-button-icon.png)no-repeat center center;
+    height: 60px;
+    width: 60px;
+    font-size: 60px;
+    color: #eee;
     overflow: hidden;
-    text-indent: 100%;
     white-space: nowrap;
     visibility: hidden;
     opacity: 0;     
     transform: scale(0);
     visibility: 0s 0.3s, opacity 0.3s 0s;
+    float: right;
      
     transition: transform 0.3s 0s, visibility 0s 0.3s, opacity 0.3s 0s;
 }
@@ -177,7 +356,7 @@ body{
     width: 100%;
     opacity: 0;
     visibility: hidden;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .cd-transition-layer .bg-layer {

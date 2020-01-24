@@ -10,6 +10,8 @@ class SubtaskRouter {
   // This utilises the express Router method, basically we are binding the path/ request to each restful verb
   router() {
     let router = express.Router();
+    router.post('/list', this.listSubtask.bind(this));
+    router.post('/getid', this.getid.bind(this));
     router.post('/add', this.addSubtask.bind(this));
     router.delete('/remove', this.deleteSubtask.bind(this));
     router.put('/amassigned', this.amendPerson.bind(this));
@@ -17,14 +19,34 @@ class SubtaskRouter {
     router.put('/amdate', this.amendDuedate.bind(this));
     router.put('/mark', this.markComplete.bind(this));
     router.put('/unmark', this.markUnComplete.bind(this));
+    router.put('/check', this.countRemaining.bind(this));
     return router;
   }
+  listSubtask(req, res) {
+    //console.log(req.session.passport.user.id)
+    //console.log(req.body.content, req.auth.user);
+    return this.subtaskService
+      .listSubtask(
+        req.body.taskID
+      )
+      .then(notes => res.json(notes))
+      .catch(err => res.status(500).json(err));
+  }
+  getid(req, res) {
+    return this.subtaskService
+      .getSubId(
+        req.body.taskID,
+        req.body.name
+      )
+      .then(notes => res.json(notes))
+      .catch(err => res.status(500).json(err));
+  }
+
   addSubtask(req, res) {
     //console.log(req.session.passport.user.id)
     //console.log(req.body.content, req.auth.user);
     return this.subtaskService
       .addSubtask(
-        req.body.userID,
         req.body.taskID,
         req.body.name,
         req.body.dueDate
@@ -86,6 +108,15 @@ class SubtaskRouter {
         req.body.subtaskID,
       )
       .then(notes => res.send('I unmarked completed!'))
+      .catch(err => res.status(500).json(err));
+  }
+
+  countRemaining(req, res) {
+    return this.subtaskService
+      .countUnComplete(
+        req.body.taskID
+      )
+      .then(notes => res.json(notes))
       .catch(err => res.status(500).json(err));
   }
 

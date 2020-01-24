@@ -22,7 +22,7 @@ module.exports = express => {
   router.post(
     '/login',
     passport.authenticate('local-login', {
-      successRedirect: '/testproject',
+      successRedirect: '/userpage',
       failureRedirect: '/error'
     })
   );
@@ -35,7 +35,7 @@ module.exports = express => {
   router.post(
     '/signup',
     passport.authenticate('local-signup', {
-      successRedirect: '/testproject',
+      successRedirect: '/userpage',
       failureRedirect: '/error'
     })
   );
@@ -51,7 +51,7 @@ module.exports = express => {
   router.get(
     '/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/testproject',
+      successRedirect: '/userpage',
 
       failureRedirect: '/'
     })
@@ -72,7 +72,7 @@ module.exports = express => {
     '/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     function(req, res) {
-      res.redirect('/testproject');
+      res.redirect('/userpage');
     }
   );
 

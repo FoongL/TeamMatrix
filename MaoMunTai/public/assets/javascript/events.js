@@ -40,11 +40,12 @@ $(document).ready(function () {
             $(this).removeClass("visible closing opening").dequeue();
         });
 
-    }, 10);
+    }, 0.1);
 
 });
 
 $(window).on('load',function () {
+
 
 
     function smokeeffect() {
@@ -132,12 +133,12 @@ for (i = 0; i < coll.length; i++) {
     });
 }
 
-//Social Media Login/Sign Up On Click
-
-$(`#facebook`).onclick('click', function(){
-
-})
-
-$(`#gmail`).onclick('click', function(){
-
-})
+/* Open */
+function openNav(){
+document.getElementById('learn-more').style.height="100%";
+}
+  
+  /* Close */
+  function closeNav(){
+    document.getElementById('learn-more').style.height="0%";
+    }

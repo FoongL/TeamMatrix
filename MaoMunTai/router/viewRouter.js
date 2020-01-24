@@ -22,7 +22,7 @@ module.exports = express => {
       return next();
     }
     //double check login or signup URL
-    res.redirect('/test');
+    res.redirect('/');
   }
 
   //double check main page URL
@@ -30,13 +30,22 @@ module.exports = express => {
     res.render('home');
   });
 
-  router.get('/projects', (req, res) => {
-    res.render('2', { title: '2', layout: 'project' });
+  router.get('/userpage', isLoggedIn, async (req, res) => {
+    let user = req.session.passport.user;
+    let projectlist = await projectService.listProject(user['id'])
+    res.render('2', {
+      projectList : projectlist,
+      layout: 'project', 
+    });
   });
 
-  //-------------test site:
-  router.get('/test', (req, res) => {
-    res.render('testLogin');
+  router.get('/createproject', isLoggedIn, async (req, res) => {
+    let user = req.session.passport.user;
+    let projectlist = await projectService.listProject(user['id'])
+    res.render('projectCreate', {
+      projectList : projectlist,
+      layout: 'project', 
+    });
   });
 
   router.get('/testproject', isLoggedIn, (req, res) => {
@@ -45,11 +54,13 @@ module.exports = express => {
     res.render('2', { title: '2', layout: 'projectTest' });
   });
 
-  router.get('/testprojectone', isLoggedIn, async (req, res) => {
+  router.get('/project/:projectid', isLoggedIn, async (req, res) => {
     var curTime = new Date();
     curTime = new Date(curTime.toISOString().slice(0, 10) + ' 00:00:00+08');
     let user = req.session.passport.user;
-    let projects = 31;
+      let projectlist = await projectService.listProject(user['id'])
+  
+    let projects = req.params.projectid;
     let projectDetails = await projectService.projectDetails(projects);
     let assigned = await taskService.listTask(projects, 1);
     for (let x in assigned) {
@@ -105,6 +116,8 @@ module.exports = express => {
       ', ' +
       dueDate.getFullYear();
     res.render('projectDetails', {
+      projectList : projectlist,
+      projectID: projects,
       projectName: projectDetails[0]['name'],
       projectDesc: projectDetails[0]['desc'],
       projectDue: dateDue,
@@ -112,10 +125,17 @@ module.exports = express => {
       taskAssigned: assigned,
       taskInProgress: inProgress,
       takCompleted: completed,
-      title: '2',
-      layout: 'projectTest'
+      layout: 'project'
     });
   });
+
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
 
   return router;
 };

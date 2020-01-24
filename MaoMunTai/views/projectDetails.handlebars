@@ -1,3 +1,4 @@
+<div class='secretIDHolder' id={{projectID}}></div>
 <div class="content">
         <div class='ProjectDetails'>
                 <div>
@@ -9,18 +10,22 @@
                         <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
                 </div>
         </div>
-
-        <div class='container' id='taskManagementDisplay'>
+        
+        <div class='mainBody' id='taskManagementDisplay'>
                 <div class='phaseDisplay' id='assignedtasks'>
                         <div id='assignTaskHeader'>
-                        <h3 class='taskLabel'>Assigned</h3>
-                        <a>+ Add Task</a>
+                                <h3 class='taskLabel'>Assigned</h3>
+                                <a class='textLink' id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
+                                        + Add Task
+                                </a>
+
                         </div>
                         <div class='taskDisplay'>
                                 {{#each taskAssigned}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>{{days_left}}</p>
                                 </div>
                                 {{/each}}
                                 <div id='buttSpace'></div>
@@ -30,9 +35,10 @@
                         <h3 class='taskLabel'>In Progress</h3>
                         <div class='taskDisplay'>
                                 {{#each taskInProgress}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>{{days_left}}</p>
                                 </div>
                                 {{/each}}
                                 <div id='buttSpace'></div>
@@ -42,11 +48,317 @@
                         <h3 class='taskLabel'>Completed</h3>
                         <div class='taskDisplay'>
                                 {{#each takCompleted}}
-                                <div class='assigned task' id={{id}}>
-                                        <h6>{{name}}</h6>
-                                        <p>{{days_left}}</p>
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>COMPLETED</p>
                                 </div>
                                 {{/each}}
                                 <div id='buttSpace'></div>
                         </div>
                 </div>
+        </div>
+</div>
+</div>
+</div>
+{{> navbar}}
+
+<div class="modal fade" id="addTaskModal">
+        <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Task name:</label>
+                                                <input id='taskName' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Task description:</label>
+                                                <input id='taskDesc' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Due date:</label>
+                                                <input id='taskDue' type="date" required>
+                                        </div>
+                                        <div id="inTheProject"></div>
+                                        <div class="addTaskInput">
+                                                <label>Add teammates:</label>
+                                                <input id='userSearch' type="text" required>
+                                        </div>
+                                        <div id="nameList"></div>
+                                </form>
+                                <div id='subtaskButt'>
+
+                                        <button id='subButton' type="button" class="btn btn-secondary"
+                                                data-toggle="modal" data-target="#addSubTaskModal">Add
+                                                subtask</button>
+                                        <div id='subButt'></div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='taskSave' type="button" class="btn btn-primary">Save
+                                        changes</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<div class="modal fade" id="addSubTaskModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Subtask</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Name:</label>
+                                                <input id='subtaskName' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Due Date:</label>
+                                                <input id='subtaskDue' type="date" required>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='subSave' type="button" class="btn btn-primary">Save
+                                        subtask</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+
+<div class="modal fade" id="TaskModal">
+        <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="TaskTitle">Task Detail</h5>
+                                <div id='startButton'>
+                                        <label>Start project:</label>
+                                        <input type="checkbox" id="switch" /><label id="switchLabel"
+                                                for="switch">Toggle</label>
+                                </div>
+                        </div>
+                        <div id='TaskModalBody' class="modal-body">
+                                <div id='TaskModalBodyBreak'>
+                                        <div id='dateDisp'>
+                                                <h6>Due date:</h6>
+
+                                                <p id='TaskDue'></p>
+
+                                        </div>
+                                        <h6>Description:</h6>
+                                        <p id='TaskModalDescription'></p>
+                                        <div id='subtaskCheck'>
+                                                <h6>Checklist: </h6>
+                                                <div id='checkList'>
+                                                        <label class="checker">One
+                                                                <input type="checkbox">
+                                                                <span class="checkmark"></span>
+                                                        </label>
+                                                </div>
+
+                                        </div>
+                                        <a class='textLink' id='addTaskButton' data-toggle="modal"
+                                                data-target="#addToChecklist">
+                                                + Add subtask
+                                        </a>
+                                </div>
+                                <div id='TaskModalDetails'>
+                                        <div id='TaskMemberList'>
+                                                <h6>Teammates: </h6>
+                                                <div id='teamList'>
+                                                        <p>Foong Leung, leung.foong@gmail.com</p>
+                                                </div>
+                                                <a class='textLink' id='addMemkButton' data-toggle="modal"
+                                                        data-target="#addTeaMate">
+                                                        + Add teammate
+                                                </a>
+                                                <div id='TaskEditList'>
+                                                        <h6>Settings: </h6>
+                                                        <a id='taskNameEdit' class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskName">Edit name</a> <br>
+                                                        <a id='taskDescEdit' class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskDesc">Edit description</a><br>
+                                                        <a id='taskDueEdit' class='textLink' data-toggle="modal"
+                                                                data-target="#editTaskDue">Edit due date</a><br>
+                                                        <a class='textLink deleteWarn' data-toggle="modal"
+                                                                data-target="#deleteTask">Delete task</a>
+
+
+                                                </div>
+
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='closeTaskDetail' type="button" class="btn btn-secondary">Done</button>
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskName">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task name</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">Enter new name:</label>
+                                                <input id='newtaskName' type="text" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='nameChange' type="button" class="btn btn-secondary">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskDesc">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task description</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">Enter new description:</label>
+                                                <input id='editedDescription' type="text" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='descChange' type="button" class="btn btn-secondary">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editTaskDue">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Edit task due date:</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Enter new due date:</label>
+                                                <input id='newDue' type="date" required>
+                                        </div>
+                                </form>
+                        </div>
+                        <div class="modal-footer">
+                                <button id='dueChange' type="button" class="btn btn-secondary">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+
+<div class="modal fade" id="deleteTask">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Confirm delete?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <button id='taskDelete' type="button" class="btn btn-danger">YES! DELETE!</button>
+                        </div>
+
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="modal fade" id="addToChecklist">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add New Subtask</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Name:</label>
+                                                <input id='addsubtaskName' type="text" required>
+                                        </div>
+                                        <div class="addTaskInput">
+                                                <label>Subtask Due Date:</label>
+                                                <input id='addsubtaskDue' type="date" required>
+                                        </div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='addSub' type="button" class="btn btn-primary">Save
+                                        subtask</button>
+
+                        </div>
+                </div>
+        </div>
+</div>
+<div class="modal fade" id="addTeaMate">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" id="SubTaskModal">
+                        <div class="modal-header">
+                                <h5 class="modal-title" id="addTaskTitle">Add teammates</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                        <div class="addTaskInput">
+                                                <div id="AddToTask"></div>
+                                                <label>Add teammates:</label>
+                                                <input id='addMemSearch' type="text" required>
+                                        </div>
+                                        <div id="addMemList"></div>
+                                </form>
+
+                        </div>
+                        <div class="modal-footer">
+                                <button id='addMem' type="button" class="btn btn-secondary">Done</button>
+
+                        </div>
+                </div>
+        </div>
+</div>

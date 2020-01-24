@@ -374,3 +374,19 @@
 	window.MLMenu = MLMenu;
 
 })(window);
+
+
+$('#dub-arrow').click(async function(event){
+	console.log("hello")
+	await $.ajax({
+        url: `/logout`,
+        type: 'GET',
+        success: function(result) {
+		  console.log('goodbye!');
+		  location.reload()
+        },
+        error: function(request, msg, error) {
+          console.log('failed');
+        }
+      });
+})
