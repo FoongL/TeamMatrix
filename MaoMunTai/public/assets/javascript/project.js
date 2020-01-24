@@ -375,4 +375,4 @@
 
 })(window);
 
-Handlebars.registerPartial("navbar",$("nav-bar").handlebars());
+

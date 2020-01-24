@@ -40,7 +40,7 @@ $(document).ready(function () {
             $(this).removeClass("visible closing opening").dequeue();
         });
 
-    }, 10);
+    }, 0.1);
 
 });
 

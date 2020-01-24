@@ -17,10 +17,10 @@
             <!-- Submenu 1 -->
             <ul data-menu="submenu-1" id="submenu-1" class="menu__level" tabindex="-1" role="menu"
                 aria-label="Projects">
-                <li class="menu__item" role="menuitem"><a class="menu__link" href="#">Create New Project</a></li>
+                <li class="final__item" role="menuitem"><a class="menu__link" href="/createproject">Create New Project</a></li>
 
                 {{#each projectList}}
-                <li class="menu__item" role="menuitem"><a class="menu__link" href="#">{{name}}</a></li>
+                <li class="final__item" role="menuitem"><a class="menu__link" href="/project/{{id}}">{{name}}</a></li>
                 {{/each}}
 
             </ul>
@@ -30,16 +30,16 @@
                 <li class="menu__item" role="menuitem"><a class="menu__link" href="#">History</a></li>
             </ul>
             <div class="wrapper-buttons">
-                <div class="position-mao">
+                {{!-- <div class="position-mao">
                     <div class="button" id="button-5">
                         <div id="translate"></div>
                         <a href="#">Mao Mode</a>
                     </div>
-                </div>
+                </div> --}}
                 <div class="position-logout">
                     <div class="button" id="button-7">
                         <div id="dub-arrow"><img src="/assets/images/logout-icon.png" alt="" /></div>
-                        <a href="#">Log Out</a>
+                        <a href="/logout">Log Out</a>
                     </div>
                 </div>
             </div>

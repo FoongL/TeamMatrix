@@ -1,77 +1,67 @@
-<!-- Main container -->
-<div class="container-nav">
-        <header class="bp-header cf">
-                <div class="dummy-logo">
-                        <h2 class="dummy-heading">Mao Mun Tai</h2>
+<div class='secretIDHolder' id={{projectID}}></div>
+<div class="content">
+        <div class='ProjectDetails'>
+                <div>
+                        <h2 id='projectName'>{{projectName}}</h2>
+                        <h4 id='projectDescription'>{{projectDesc}}</h4>
                 </div>
-        </header>
-        <div>
-                {{> navbar}}
+                <div>
+                        <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
+                        <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
+                </div>
+        </div>
+        
+        <div class='mainBody' id='taskManagementDisplay'>
+                <div class='phaseDisplay' id='assignedtasks'>
+                        <div id='assignTaskHeader'>
+                                <h3 class='taskLabel'>Assigned</h3>
+                                <a class='textLink' id='addTaskButton' data-toggle="modal" data-target="#addTaskModal">
+                                        + Add Task
+                                </a>
 
-                <div class='secretIDHolder' id={{projectID}}></div>
-                <div class="content">
-                        <div class='ProjectDetails'>
-                                <div>
-                                        <h2 id='projectName'>{{projectName}}</h2>
-                                        <h4 id='projectDescription'>{{projectDesc}}</h4>
-                                </div>
-                                <div>
-                                        <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
-                                        <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
-                                </div>
                         </div>
-
-                        <div class='mainBody' id='taskManagementDisplay'>
-                                <div class='phaseDisplay' id='assignedtasks'>
-                                        <div id='assignTaskHeader'>
-                                                <h3 class='taskLabel'>Assigned</h3>
-                                                <a class='textLink' id='addTaskButton' data-toggle="modal"
-                                                        data-target="#addTaskModal">
-                                                        + Add Task
-                                                </a>
-
-                                        </div>
-                                        <div class='taskDisplay'>
-                                                {{#each taskAssigned}}
-                                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
-                                                        data-target="#TaskModal" class='assigned task' id={{id}}>
-                                                        <h6 id={{id}}>{{name}}</h6>
-                                                        <p id={{id}}>{{days_left}}</p>
-                                                </div>
-                                                {{/each}}
-                                                <div id='buttSpace'></div>
-                                        </div>
+                        <div class='taskDisplay'>
+                                {{#each taskAssigned}}
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>{{days_left}}</p>
                                 </div>
-                                <div class='phaseDisplay' id='inProgress'>
-                                        <h3 class='taskLabel'>In Progress</h3>
-                                        <div class='taskDisplay'>
-                                                {{#each taskInProgress}}
-                                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
-                                                        data-target="#TaskModal" class='assigned task' id={{id}}>
-                                                        <h6 id={{id}}>{{name}}</h6>
-                                                        <p id={{id}}>{{days_left}}</p>
-                                                </div>
-                                                {{/each}}
-                                                <div id='buttSpace'></div>
-                                        </div>
+                                {{/each}}
+                                <div id='buttSpace'></div>
+                        </div>
+                </div>
+                <div class='phaseDisplay' id='inProgress'>
+                        <h3 class='taskLabel'>In Progress</h3>
+                        <div class='taskDisplay'>
+                                {{#each taskInProgress}}
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>{{days_left}}</p>
                                 </div>
-                                <div class='phaseDisplay' id='completedTasks'>
-                                        <h3 class='taskLabel'>Completed</h3>
-                                        <div class='taskDisplay'>
-                                                {{#each takCompleted}}
-                                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
-                                                        data-target="#TaskModal" class='assigned task' id={{id}}>
-                                                        <h6 id={{id}}>{{name}}</h6>
-                                                        <p id={{id}}>COMPLETED</p>
-                                                </div>
-                                                {{/each}}
-                                                <div id='buttSpace'></div>
-                                        </div>
+                                {{/each}}
+                                <div id='buttSpace'></div>
+                        </div>
+                </div>
+                <div class='phaseDisplay' id='completedTasks'>
+                        <h3 class='taskLabel'>Completed</h3>
+                        <div class='taskDisplay'>
+                                {{#each takCompleted}}
+                                <div data-backdrop="static" data-keyboard="false" data-toggle="modal"
+                                        data-target="#TaskModal" class='assigned task' id={{id}}>
+                                        <h6 id={{id}}>{{name}}</h6>
+                                        <p id={{id}}>COMPLETED</p>
                                 </div>
+                                {{/each}}
+                                <div id='buttSpace'></div>
                         </div>
                 </div>
         </div>
 </div>
+</div>
+</div>
+{{> navbar}}
 
 <div class="modal fade" id="addTaskModal">
         <div class="modal-xl modal-dialog modal-dialog-centered" role="document">
@@ -366,8 +356,7 @@
 
                         </div>
                         <div class="modal-footer">
-                                <button id='addMem' type="button" class="btn btn-secondary"
-                                        >Done</button>
+                                <button id='addMem' type="button" class="btn btn-secondary">Done</button>
 
                         </div>
                 </div>

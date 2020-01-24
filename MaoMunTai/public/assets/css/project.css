@@ -44,6 +44,11 @@
 	width: calc(100% - 50px);
 }
 
+.final__item {
+	display: block;
+	width: calc(100% - 50px);
+}
+
 .menu__link {
 	font-weight: 600;
 	position: relative;
@@ -102,7 +107,12 @@
 	visibility: visible;
 }
 
-.animate-outToRight .menu__item {
+.animate-outToRight .menu__item{
+	-webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+	animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.animate-outToRight .final__item{
 	-webkit-animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 	animation: outToRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -123,7 +133,12 @@
 	}
 }
 
-.animate-outToLeft .menu__item {
+.animate-outToLeft .menu__item{
+	-webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+	animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.animate-outToLeft .final__item{
 	-webkit-animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 	animation: outToLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -144,7 +159,11 @@
 	}
 }
 
-.animate-inFromLeft .menu__item {
+.animate-inFromLeft .menu__item{
+	-webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+	animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+.animate-inFromLeft .final__item{
 	-webkit-animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 	animation: inFromLeft 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 }
@@ -175,7 +194,12 @@
 	}
 }
 
-.animate-inFromRight .menu__item {
+.animate-inFromRight .menu__item{
+	-webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+	animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.animate-inFromRight .final__item{
 	-webkit-animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 	animation: inFromRight 0.6s both cubic-bezier(0.7, 0, 0.3, 1);
 }

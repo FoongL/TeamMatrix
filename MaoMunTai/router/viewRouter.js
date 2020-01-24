@@ -30,8 +30,22 @@ module.exports = express => {
     res.render('home');
   });
 
-  router.get('/userpage', (req, res) => {
-    res.render('2', { title: '2', layout: 'project' });
+  router.get('/userpage', isLoggedIn, async (req, res) => {
+    let user = req.session.passport.user;
+    let projectlist = await projectService.listProject(user['id'])
+    res.render('2', {
+      projectList : projectlist,
+      layout: 'project', 
+    });
+  });
+
+  router.get('/createproject', isLoggedIn, async (req, res) => {
+    let user = req.session.passport.user;
+    let projectlist = await projectService.listProject(user['id'])
+    res.render('projectCreate', {
+      projectList : projectlist,
+      layout: 'project', 
+    });
   });
 
   router.get('/testproject', isLoggedIn, (req, res) => {
@@ -40,14 +54,13 @@ module.exports = express => {
     res.render('2', { title: '2', layout: 'projectTest' });
   });
 
-  router.get('/testprojectone', isLoggedIn, async (req, res) => {
+  router.get('/project/:projectid', isLoggedIn, async (req, res) => {
     var curTime = new Date();
     curTime = new Date(curTime.toISOString().slice(0, 10) + ' 00:00:00+08');
     let user = req.session.passport.user;
+      let projectlist = await projectService.listProject(user['id'])
   
-    let projectlist = await projectService.listProject(user['id'])
-  
-    let projects = 31;
+    let projects = req.params.projectid;
     let projectDetails = await projectService.projectDetails(projects);
     let assigned = await taskService.listTask(projects, 1);
     for (let x in assigned) {
@@ -115,6 +128,14 @@ module.exports = express => {
       layout: 'project'
     });
   });
+
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
 
   return router;
 };
