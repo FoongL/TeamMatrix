@@ -27,10 +27,6 @@ class TaskRouter {
     router.put('/taskcomplete', this.markCompleted.bind(this));
     router.put('/phasecheck', this.phaseCheck.bind(this));
 
-
-
-
-    
     return router;
   }
   addTask(req, res) {
