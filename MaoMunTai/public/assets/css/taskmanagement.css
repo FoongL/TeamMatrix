@@ -100,6 +100,7 @@
 }
 
 .task {
+  min-height: 15%;
   max-height: 20%;
   width: 95%;
   background-color: rgb(219, 219, 219);
@@ -111,12 +112,13 @@
   cursor: pointer;
 }
 
-h6 {
+.task h6 {
   font-size: 22px;
   margin-top: 30px;
   margin-bottom: 2px;
   margin-left: 10px;
   text-decoration: underline;
+  color: rgb(77, 77, 77);
 }
 
 .task p {
@@ -124,6 +126,7 @@ h6 {
   margin-top: 3px;
   margin-left: 10px;
   padding-bottom: 10px;
+  color: rgb(77, 77, 77);
 }
 
 #assignTaskHeader {
