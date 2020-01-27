@@ -310,9 +310,7 @@ $('.assigned').on('click', async function(event) {
   });
   //------------------ deleting team members from a task;
   $('#teamList').on('click', '.trash', async function() {
-    //console.log($(this).parent()[0]['id']);
     delMemId = $(this).parent()[0]['id'];
-    //console.log(TaskId)
     await $.ajax({
       url: `/api/tasks/removeuser`,
       type: 'PUT',

@@ -19,7 +19,9 @@ class ProjectRouter {
     router.post('/amendname', this.amendProjName.bind(this));
     router.post('/amenddate', this.amendProjDue.bind(this));
     router.post('/listallusers', this.listALlUsers.bind(this));
+    router.post('/remuser', this.removeUser.bind(this));
     return router;
+    
   }
   listprojects(req, res) {
     return this.projectService
@@ -79,6 +81,13 @@ class ProjectRouter {
     return this.projectService
       .listAllUsers()
       .then(notes => res.json(notes))
+      .catch(err => res.status(500).json(err));
+  }
+
+  removeUser(req, res) {
+    return this.projectService
+      .removeUser(req.body.projectId, req.body.user)
+      .then(notes => res.send('done'))
       .catch(err => res.status(500).json(err));
   }
 }

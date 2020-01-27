@@ -4,9 +4,12 @@ $('#ProjNameEdit').click(function (event) {
   $('#newProjName').val('');
 });
 $('#projDueEdit').click(function (event) {
-  console.log('DescEdit');
+  $('#newProjDue').val('');
 });
-$('#ProjManUse').click(function (event) { });
+$('#ProjManUse').click(function (event) { 
+  $('#addMemProject').val('');
+
+});
 
 //----- simple edit forms ajax calls
 $('#nameChangeProj').click(async function (event) {
@@ -166,7 +169,7 @@ $('#ProjManUse').click(async function (event) {
         const output = await matches
           .map(
             match => `
-              <div>
+              <div id='${match.id}'>
               <a class='clickable' name='${match.f_name} ${match.l_name}(${match.email})' id='${match.id}'>${match.f_name} ${match.l_name} (${match.email})</a>
               </div>
               `
@@ -202,4 +205,29 @@ $('#addMemListProj,.clickable').on('click', async function (event) {
   );
   $('#addMemProject').val('')
   $('#addMemListProj').empty();
+})
+
+//deleting users form a project
+$('#ProjteamList').on('click', '.trash', async function() {
+  delMemId = $(this).parent()[0]['id'];
+console.log(delMemId)
+
+await $.ajax({
+  url: `/api/projects/remuser`,
+  type: 'POST',
+  data: {
+    projectId: `${ProjID}`,
+    user: `${delMemId}`
+  },
+  success: function(result) {
+    return;
+  },
+  error: function(request, msg, error) {
+    console.log('failed');
+  }
+});
+$('#ProjteamList')
+.children(`#${delMemId}`)
+.hide();
+
 })

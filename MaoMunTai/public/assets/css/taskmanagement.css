@@ -225,7 +225,7 @@
   width: 100%;
 }
 .clickable {
-  cursor: pointer;
+  cursor: pointer! important;
   color: rgb(63, 63, 63);
 }
 
@@ -521,3 +521,46 @@ text-decoration: none;
 #addMemList .clickable:hover:after {
   width: 100%;
 }
+
+#addMemListProj {
+  display:flex;
+  flex-direction:row;
+  color: rgb(4, 43, 102);
+  height: 40px;
+  overflow: scroll;
+}
+
+#addMemListProj .clickable{
+  margin-top: 5px;
+  margin-right: 13px;
+  display: inline-block;
+}
+#addMemListProj .clickable:hover{
+  color: rgb(13, 88, 201);
+  transition: 0.3s;
+}
+#addMemListProj .clickable:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: rgb(13, 88, 201);
+  transition: 300ms;
+}
+
+#addMemListProj .clickable:hover:after {
+  width: 100%;
+}
+#ManageUsers .modal-body{
+  color: rgb(97, 97, 97);
+}
+
+#ManageUsers h6{
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+#ManageUsers i{
+  margin-right: 15px;
+}
+

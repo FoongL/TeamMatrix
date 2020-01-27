@@ -12,6 +12,10 @@ addTaskButton.on('click', function() {
   taskAssignList = new Set();
   $('#inTheProject').empty();
   $('#subButt').empty();
+  $('#taskName').val('');
+  $('#taskDesc').val('');
+  $('#taskDue').val('');
+  $('userSearch').val('');
   $.ajax({
     url: `/api/projects/getusers`,
     type: 'POST',
@@ -53,7 +57,7 @@ const outputHTML = async matches => {
     const output = await matches
       .map(
         match => `
-        <div>
+        <div id='${match.id}'>
         <a class='clickable' name='${match.f_name} ${match.l_name}' id='${match.id}'>${match.f_name} ${match.l_name} (${match.email})</a>
         </div>
         `
@@ -137,7 +141,7 @@ $('#taskSave').on('click', async function(event) {
     return;
   }
 
-  if (userList.length ==0){
+  if (userList.length == 0) {
     alert('Must have at least one person assigned to task to initiate!');
     return;
   }
