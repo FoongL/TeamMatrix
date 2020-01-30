@@ -1,0 +1,24 @@
+.content {
+    height: 100vh;
+}
+.dashCountDown{
+    margin-top: 10px;
+    padding-right: 45px;
+}
+
+
+#graph-container{
+    width: 100%;
+    height: 100%;
+}
+
+.graphs{
+    height: 42%;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-around
+}
+.graph{ 
+    height: 100%;
+    width: 45%;
+}

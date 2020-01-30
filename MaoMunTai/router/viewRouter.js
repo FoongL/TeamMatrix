@@ -32,40 +32,72 @@ module.exports = express => {
 
   router.get('/userpage', isLoggedIn, async (req, res) => {
     let user = req.session.passport.user;
-    let projectlist = await projectService.listProject(user['id'])
+    let projectlist = await projectService.listProject(user['id']);
     res.render('2', {
-      projectList : projectlist,
-      layout: 'project', 
+      projectList: projectlist,
+      layout: 'project'
     });
   });
 
   router.get('/createproject', isLoggedIn, async (req, res) => {
     let user = req.session.passport.user;
-    let projectlist = await projectService.listProject(user['id'])
+    let projectlist = await projectService.listProject(user['id']);
     res.render('projectCreate', {
-      projectList : projectlist,
-      layout: 'project', 
+      projectList: projectlist,
+      layout: 'project'
     });
   });
 
-  router.get('/testproject', isLoggedIn, (req, res) => {
+  router.get('/dashboard/:projectid', isLoggedIn, async (req, res) => {
+    var curTime = new Date();
+    curTime = new Date(curTime.toISOString().slice(0, 10) + ' 00:00:00+08');
     let user = req.session.passport.user;
-    //console.log(user.id);
-    res.render('2', { title: '2', layout: 'projectTest' });
+    let projectlist = await projectService.listProject(user['id']);
+
+    let projects = req.params.projectid;
+    let projectDetails = await projectService.projectDetails(projects);
+    let dueDate = new Date(projectDetails[0]['due_date']);
+    let dateCountDown =
+      (dueDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24);
+    if (dateCountDown == 0) {
+      dateCountDown = 'DUE TODAY!';
+    } else if (dateCountDown > 0) {
+      dateCountDown = dateCountDown + ' Days Remaining';
+    } else {
+      dateCountDown = Math.abs(dateCountDown) + ' Days Overdue';
+    }
+    let months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
+    let dateDue =
+      dueDate.getDate() +
+      ' ' +
+      months[dueDate.getMonth()] +
+      ', ' +
+      dueDate.getFullYear();
+    res.render('dashboard', {
+      projectList: projectlist,
+      projectID: projects,
+      projectName: projectDetails[0]['name'],
+      projectDesc: projectDetails[0]['desc'],
+      projectDue: dateDue,
+      daysLeft: dateCountDown,
+      layout: 'project'
+    });
   });
 
   router.get('/project/:projectid', isLoggedIn, async (req, res) => {
     var curTime = new Date();
     curTime = new Date(curTime.toISOString().slice(0, 10) + ' 00:00:00+08');
     let user = req.session.passport.user;
-      let projectlist = await projectService.listProject(user['id'])
-  
+    let projectlist = await projectService.listProject(user['id']);
+
     let projects = req.params.projectid;
     let projectDetails = await projectService.projectDetails(projects);
     let assigned = await taskService.listTask(projects, 1);
     for (let x in assigned) {
-      let checkDate = new Date(assigned[x]['due_date'])
-      let taskCountDown = Math.round((checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24));
+      let checkDate = new Date(assigned[x]['due_date']);
+      let taskCountDown = Math.round(
+        (checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24)
+      );
       if (taskCountDown == 0) {
         assigned[x]['days_left'] = 'DUE TODAY!';
       } else if (taskCountDown > 0) {
@@ -76,8 +108,10 @@ module.exports = express => {
     }
     let inProgress = await taskService.listTask(projects, 2);
     for (let x in inProgress) {
-      let checkDate = new Date(inProgress[x]['due_date'])
-      let taskCountDown = Math.round((checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24));
+      let checkDate = new Date(inProgress[x]['due_date']);
+      let taskCountDown = Math.round(
+        (checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24)
+      );
       if (taskCountDown == 0) {
         inProgress[x]['days_left'] = 'DUE TODAY!';
       } else if (taskCountDown > 0) {
@@ -88,8 +122,10 @@ module.exports = express => {
     }
     let completed = await taskService.listTask(projects, 3);
     for (let x in completed) {
-      let checkDate = new Date(completed[x]['due_date'])
-      let taskCountDown = Math.round((checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24));
+      let checkDate = new Date(completed[x]['due_date']);
+      let taskCountDown = Math.round(
+        (checkDate.getTime() - curTime.getTime()) / (1000 * 3600 * 24)
+      );
       if (taskCountDown == 0) {
         completed[x]['days_left'] = 'DUE TODAY!';
       } else if (taskCountDown > 0) {
@@ -116,7 +152,7 @@ module.exports = express => {
       ', ' +
       dueDate.getFullYear();
     res.render('projectDetails', {
-      projectList : projectlist,
+      projectList: projectlist,
       projectID: projects,
       projectName: projectDetails[0]['name'],
       projectDesc: projectDetails[0]['desc'],
@@ -129,13 +165,10 @@ module.exports = express => {
     });
   });
 
-
-router.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-
+  router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 
   return router;
 };

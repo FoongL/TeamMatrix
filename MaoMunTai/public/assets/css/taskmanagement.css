@@ -10,26 +10,26 @@
 /* project settings buttons */
 .projectSetting {
   padding-left: 45px;
-  width:55%;
-  display:flex;
+  width: 55%;
+  display: flex;
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
 }
-.projectSetting a{
-  color:rgb(119, 121, 199) !important;
-  padding-left:0px;
+.projectSetting a {
+  color: rgb(119, 121, 199) !important;
+  padding-left: 0px;
 }
 
 .ProjectDetails {
   display: flex;
   justify-content: space-between;
-  margin-top:0px;
-  padding-top:0px;
+  margin-top: 0px;
+  padding-top: 0px;
   margin-bottom: 15px;
 }
 
-.projectCountDown{
-  margin-top:-30px;
+.projectCountDown {
+  margin-top: -30px;
   margin-right: 20px;
 }
 #projectName {
@@ -62,7 +62,7 @@
   height: 80vh;
   width: 28%;
   border-radius: 8px;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .taskDisplay {
@@ -196,19 +196,19 @@
 }
 
 #nameList {
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   color: rgb(4, 43, 102);
   height: 40px;
   overflow: scroll;
 }
 
-#nameList .clickable{
+#nameList .clickable {
   margin-top: 5px;
   margin-right: 13px;
   display: inline-block;
 }
-#nameList .clickable:hover{
+#nameList .clickable:hover {
   color: rgb(13, 88, 201);
   transition: 0.3s;
 }
@@ -225,7 +225,7 @@
   width: 100%;
 }
 .clickable {
-  cursor: pointer! important;
+  cursor: pointer !important;
   color: rgb(63, 63, 63);
 }
 
@@ -272,21 +272,21 @@ form label {
 .modal-header {
   align-items: center;
 }
-#dateDisp{
-  display:flex;
-  flex-direction:row;
+#dateDisp {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
-#dateDisp p{
+#dateDisp p {
   font-size: 20px;
   padding-left: 8px !important;
-  text-decoration:underline;
-  }
-#dateDisp h6{
-margin-top:0px;
-margin-bottom: 0px;
-font-size: 22px;
-text-decoration: none;
+  text-decoration: underline;
+}
+#dateDisp h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 22px;
+  text-decoration: none;
 }
 #TaskModalBody h6 {
   padding: none;
@@ -294,67 +294,62 @@ text-decoration: none;
   color: rgb(97, 97, 97);
 }
 
-#TaskModalBody ul{
-margin: 0px;
-padding:0px;
-color: rgb(145, 76, 76);
-}
-
-#TaskModalBody p{
+#TaskModalBody ul {
   margin: 0px;
-  padding:0px;
+  padding: 0px;
   color: rgb(145, 76, 76);
-  }
-
-  #TaskModalBody label{
-    color: rgb(90, 90, 90);
-    font-size: 18px;
-    }
-
-
-#TaskModalBody{
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;
 }
-#TaskModalBodyBreak{
+
+#TaskModalBody p {
+  margin: 0px;
+  padding: 0px;
+  color: rgb(145, 76, 76);
+}
+
+#TaskModalBody label {
+  color: rgb(90, 90, 90);
+  font-size: 18px;
+}
+
+#TaskModalBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#TaskModalBodyBreak {
   width: 53%;
   height: 100%;
 }
-#TaskModal h6{
-margin-left: 0px;
-text-decoration: none;
+#TaskModal h6 {
+  margin-left: 0px;
+  text-decoration: none;
 }
-#TaskModalDetails{
+#TaskModalDetails {
   width: 35%;
 }
-#TaskMemberList{
-
+#TaskMemberList {
   width: 100%;
   height: 30%;
 }
 /* #subtaskCheck{
   max-height: 37vh;
 } */
-#checkList{
+#checkList {
   max-height: 35vh;
-  overflow:scroll;
+  overflow: scroll;
 }
 
-.trash:hover{
+.trash:hover {
   color: rgb(145, 76, 76);
   transition: 0.4s;
   cursor: pointer;
 }
 
-.checkDiv{
-  display:flex;
+.checkDiv {
+  display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
 }
-
-
-
 
 /* for the start project toggle */
 #startButton {
@@ -413,7 +408,6 @@ text-decoration: none;
 }
 /* check list checker */
 
-
 /* The container */
 .checker {
   display: block;
@@ -423,7 +417,7 @@ text-decoration: none;
   cursor: pointer;
 }
 
-#subtaskCheck h6{
+#subtaskCheck h6 {
   margin-bottom: 8px;
 }
 /* Hide the browser's default checkbox */
@@ -453,13 +447,13 @@ text-decoration: none;
 
 /* When the checkbox is checked, add a blue background */
 .checker input:checked ~ .checkmark {
-  background-color: #2196F3;
-  transition: 0.3s
+  background-color: #2196f3;
+  transition: 0.3s;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -482,7 +476,6 @@ text-decoration: none;
   transform: rotate(45deg);
 }
 
-
 /* add user to old task settings */
 #AddToTask {
   height: 25px;
@@ -493,19 +486,19 @@ text-decoration: none;
 }
 
 #addMemList {
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   color: rgb(4, 43, 102);
   height: 40px;
   overflow: scroll;
 }
 
-#addMemList .clickable{
+#addMemList .clickable {
   margin-top: 5px;
   margin-right: 13px;
   display: inline-block;
 }
-#addMemList .clickable:hover{
+#addMemList .clickable:hover {
   color: rgb(13, 88, 201);
   transition: 0.3s;
 }
@@ -523,19 +516,19 @@ text-decoration: none;
 }
 
 #addMemListProj {
-  display:flex;
-  flex-direction:row;
+  display: flex;
+  flex-direction: row;
   color: rgb(4, 43, 102);
   height: 40px;
   overflow: scroll;
 }
 
-#addMemListProj .clickable{
+#addMemListProj .clickable {
   margin-top: 5px;
   margin-right: 13px;
   display: inline-block;
 }
-#addMemListProj .clickable:hover{
+#addMemListProj .clickable:hover {
   color: rgb(13, 88, 201);
   transition: 0.3s;
 }
@@ -551,16 +544,124 @@ text-decoration: none;
 #addMemListProj .clickable:hover:after {
   width: 100%;
 }
-#ManageUsers .modal-body{
+#ManageUsers .modal-body {
   color: rgb(97, 97, 97);
 }
 
-#ManageUsers h6{
+#ManageUsers h6 {
   margin-bottom: 20px;
   font-size: 20px;
 }
 
-#ManageUsers i{
+#ManageUsers i {
   margin-right: 15px;
 }
 
+@media screen and (max-width: 1215px) {
+  .taskLabel {
+    font-size: 28px;
+  }
+
+  .textLink {
+    padding-top: 10px;
+    padding-right: 3px;
+  }
+  .task h6 {
+    font-size: 18px;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .taskLabel {
+    font-size: 22px;
+  }
+  .textLink {
+    font-size: 10px;
+    padding-right: 1px;
+    text-align:right;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #taskManagementDisplay {
+    flex-direction:column;
+    /* justify-content: space-evenly; */
+  }
+
+  .phaseDisplay{
+    width: 80%;
+    margin-right: auto;
+    margin-left:auto;
+    margin-bottom: 15px;
+  }
+
+
+  .task {
+    height: 75%;
+    max-height: 90%;
+    display: inline-block;
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+}
+
+.taskDisplay{
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /* white-space: nowrap; */
+
+}
+.fullDate{
+  display:none;
+}
+
+#dueDateCountDown {
+  font-size: 18px;
+  padding-right: 5px;
+  margin-bottom: 8px;
+  margin-top: 50px;
+}
+
+.projectSetting {
+  padding-left: 5px;
+  font-size: 8px;
+}
+.projset{
+  text-align: center;
+}
+
+.modal-title{
+  font-size:14px;
+}
+#startButton {
+  padding-right: 1px;
+}
+
+#startButton label {
+  font-size: 12px;
+}
+
+#switchLabel {
+  cursor: pointer;
+  text-indent: -3000px;
+  width: 30px;
+  height: 15px;
+  background: grey;
+  display: block;
+  border-radius: 15px;
+  position: relative;
+}
+
+#switchLabel:after {
+  content: '';
+  position: absolute;
+  top: 1.5px;
+  left: 1.5px;
+  width: 13.5px;
+  height: 13.5px;
+  background: #fff;
+  border-radius: 27px;
+  transition: 0.3s;
+}
+}

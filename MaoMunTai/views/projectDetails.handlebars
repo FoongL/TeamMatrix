@@ -3,17 +3,17 @@
         <h2 id='projectName'>{{projectName}}</h2>
         <div class='ProjectDetails'>
                 <div class='projectSetting'>
-                        <a id='ProjNameEdit' class='textLink' data-toggle="modal" data-target="#editProjName">Edit
+                        <a id='ProjNameEdit' class='textLink projset' data-toggle="modal" data-target="#editProjName">Edit
                                 name</a> <br>
 
-                        <a id='projDueEdit' class='textLink' data-toggle="modal" data-target="#editProjDue">Edit due
+                        <a id='projDueEdit' class='textLink projset' data-toggle="modal" data-target="#editProjDue">Edit due
                                 date</a><br>
-                        <a id='ProjManUse' class='textLink' data-toggle="modal" data-target="#ManageUsers">Manage
+                        <a id='ProjManUse' class='textLink projset' data-toggle="modal" data-target="#ManageUsers">Manage
                                 users</a><br>
-                        <a class='textLink deleteWarn' data-toggle="modal" data-target="#deleteProj">Delete project</a>
+                        <a class='textLink deleteWarn projset' data-toggle="modal" data-target="#deleteProj">Delete project</a>
                 </div>
                 <div class='projectCountDown'>
-                        <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
+                        <h4 class ='fullDate' id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
                         <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
 
                 </div>
@@ -67,8 +67,7 @@
                 </div>
         </div>
 </div>
-</div>
-</div>
+
 {{> navbar}}
 
 <div class="modal fade" id="addTaskModal">

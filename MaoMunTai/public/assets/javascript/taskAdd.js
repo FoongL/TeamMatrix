@@ -185,7 +185,7 @@ $('#taskSave').on('click', async function(event) {
   //console.log('task id:',taskID[0]['id'])
 
   for (let x in userList) {
-    //console.log('User:', userList[x])
+    console.log('User:', userList[x])
     await $.ajax({
       url: `/api/tasks/adduser`,
       type: 'PUT',
@@ -194,7 +194,7 @@ $('#taskSave').on('click', async function(event) {
         user: `${userList[x]}`
       },
       success: function(result) {
-        return;
+        console.log('user added');
       },
       error: function(request, msg, error) {
         console.log('failed');
@@ -213,7 +213,7 @@ $('#taskSave').on('click', async function(event) {
         dueDate: `${subTaskList[y]['saveSubtask']['due_date']}`
       },
       success: function(result) {
-        return;
+        console.log('subtask added?');
       },
       error: function(request, msg, error) {
         console.log('failed');

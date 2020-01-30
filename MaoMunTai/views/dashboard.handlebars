@@ -1,0 +1,22 @@
+<div class='secretIDHolder' id={{projectID}}></div>
+<div class="content">
+    <div class='ProjectDetails'>
+        <h2 id='projectName'>{{projectName}}</h2>
+        <div class='dashCountDown'>
+            <h4 id='dueDateCountDown'>Due Date: {{projectDue}}</h4>
+            <h4 id='dueDateCountDown'>{{daysLeft}}</h4>
+        </div>
+    </div>
+    <div id='graph-container'>
+        <div class='graphs top-row'>
+            <canvas class='graph bar' id="assignedChart"></canvas>
+            <canvas class='graph bar' id="onTaskChart"></canvas>
+        </div>
+        <div class='graphs top-bottom'>
+            <canvas class='graph bar' id="completedChart"></canvas>
+            <canvas class='graph bar' id="overdueChart"></canvas>
+        </div>
+    </div>
+</div>
+
+{{> navbar}}
