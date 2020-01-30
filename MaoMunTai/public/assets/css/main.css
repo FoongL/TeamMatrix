@@ -9,11 +9,13 @@ body{
         grid-gap: 0px;
         grid-auto-rows: minmax(100px, auto);
         height: 100vh;
+        z-index: 5;
       }
     
 .login-grid{
         grid-column: 3;
         grid-row: 2;
+        z-index: 2;
      } 
 
 .main-cover{
@@ -27,9 +29,30 @@ body{
     position: relative;
 }
 
-.name{
-    font-size: 50px;
+.cover-overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 1;
 }
+
+.name{
+    font-size: 60px;
+    color: #A60E01;
+    
+    z-index: 3;
+    -webkit-animation: name 1s ease-in-out infinite alternate;
+    -moz-animation: name 1s ease-in-out infinite alternate;
+    animation: name 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes name {
+    to {
+      text-shadow: 0 0 20px #eee, 0 0 30px #F7C007, 0 0 40px #F7C007, 0 0 50px #F7C007, 0 0 60px #F7C007, 0 0 70px #F7C007, 0 0 80px #F7C007;
+    }
+  }
 
 .main-login-butt{
     float: right;
@@ -54,6 +77,7 @@ body{
     border-width: 5px;
     border-color: #000000;
     margin-left: 15px;
+    z-index: 5;
 }
 
 .main-butt-text:hover{
@@ -61,9 +85,23 @@ body{
     background: #F7C007;
 }
 
-.ink-text{
+.title{
+    font-size: 40px;
     color: #ccc;
-    margin-right: 10px;
+    margin-top: 70px;
+    margin-left: 70px;
+}
+
+.ink-text{
+    font-size: 24px;
+    color: #ccc;
+    margin-top: 70px;
+    margin-left: 70px;
+}
+
+.ink-text-s{
+    font-size:20px;
+    color: #ccc;
 }
 
 
@@ -179,6 +217,7 @@ body{
     outline: none;
     font-size: 24px;
     align-content: center;
+    margin-top:70px;
   }
 
   
@@ -192,13 +231,14 @@ body{
     content: '\02795'; /* Unicode character for "plus" sign (+) */
     font-size: 15px;
     margin-left: 15px;
+    margin-top:-50px;
   }
   
   .active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
   }
   .content {
-    padding: 0 18px;
+    margin-top:-30px;
     background-color: transparent;
     max-height: 0;
     overflow: scroll;
@@ -206,15 +246,70 @@ body{
   }
 
   .input-text{
-    border: 2px solid #000000;
+    border: 2px solid #F7C007;
     border-radius: 4px;
-    width: 300px;
+    width: 250px;
+    font-size: 15px;
+    margin-left:70px;
+    padding: 5px;
+  }
+
+  .input-text-s{
+    border: 2px solid #F7C007;
+    border-radius: 4px;
+    width: 170px;
+    font-size: 15px;
+    padding:3px;
+    
   }
  
   .input-password{
-    border: 2px solid #000000;
+    border: 2px solid #F7C007;
     border-radius: 4px;
-    width: 300px;
+    width: 250px;
+    font-size: 15px;
+    margin-left: 70px;
+    padding: 5px;
+  }
+
+  .input-password-s{
+    border: 2px solid #F7C007;
+    border-radius: 4px;
+    width: 170px;
+    font-size: 15px;
+    padding:3px;
+  }
+
+  .input-submit{
+    font-family: 'Acme', sans-serif;
+    font-size:17px;
+    border-width: 5px;
+    border-color: #000000;
+    width: fit-content;
+    margin-left: 70px;
+    border-radius: 5px;
+  }
+
+  .input-submit-s{
+    font-family: 'Acme', sans-serif;
+    font-size:17px;
+    border-width: 5px;
+    border-color: #000000;
+    width: fit-content;
+    border-radius: 5px;
+    padding:3px;
+  }
+
+  .input-submit:hover{
+    color: #A60E01;
+    background: #F7C007;
+    border-color: #A60E01;
+  }
+
+  .input-submit-s:hover{
+    color: #A60E01;
+    background: #F7C007;
+    border-color: #A60E01;
   }
 
   .full-menu {
@@ -272,10 +367,10 @@ display: block;
 
 .sub-main-grid{
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
     grid-auto-rows: minmax(40px, auto);
-    margin-top: 15px;
+    margin-top: 45px;
 }
 
 .grid-1-1{
@@ -301,11 +396,19 @@ margin-bottom: 15px;
     margin-bottom: 20px;
 }
 
+.grid-2-1{
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 20px;
+}
+
 .grid-2-2{
     grid-column: 2;
     grid-row: 2;
     margin-bottom: 20px;
 }
+
+
 
 .grid-4-2{
     grid-column: 4;
@@ -465,7 +568,9 @@ margin-bottom: 15px;
 	text-align: center;
 	text-decoration: none;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.5);
-	white-space: nowrap;
+    white-space: nowrap;
+    margin-left: 70px;
+    margin-top:40px;
 	
 	-moz-user-select: none;
 	-webkit-user-select: none;
