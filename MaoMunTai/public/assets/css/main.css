@@ -1,3 +1,7 @@
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    display: none;
+  }
 body{
     font-family: 'Acme', sans-serif;
 }

@@ -1,17 +1,51 @@
 html {
-  background: #f7f9ff;
+  background: white;
   font-size: 10px;
 }
 
+.img {
+
+  margin-top: 20%
+
+  
+}
+
+.darkmode--activated p, .darkmode--activated li {
+  color: #A60E01;
+}
+a
+.button {
+  isolation: isolate;
+}
+
+.darkmode--activated .logo {
+  mix-blend-mode: difference;
+}
+
+.darkmode-layer, .darkmode-toggle {
+  z-index: 400;
+}
+
+.dark-mode-screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  mix-blend-mode: difference;
+}
+
+
 .errorPageRap {
   text-align: center;
-  margin: 5rem 0 13rem 0;
+  margin: 5rem 0 5rem 0;
 }
 .errorPageRap .holoContainer {
   position: relative;
   width: 25.8rem;
   height: 40rem;
-  margin: 0 0 30rem 0;
+  margin: 0 0 8rem 0;
   display: inline-block;
   vertical-align: middle;
 }
@@ -20,7 +54,7 @@ html {
   text-align: left;
   font-size: 2.8rem;
   font-weight: 400;
-  color: #506280;
+  color: #121212;
   line-height: 5.4rem;
   display: inline-block;
   vertical-align: text-bottom;
@@ -38,7 +72,7 @@ html {
   width: 100%;
 }
 .errorPageRap h1 a {
-  color: #404a5d;
+  color:#1c1d22;
   font-size: 3.3rem;
   text-decoration: none;
   font-weight: 900;

@@ -44,7 +44,7 @@ const teamOutput = async matches => {
     const output = await matches
       .map(
         match => `
-          <div>
+          <div id='${match.id}'>
           <a class='clickable' name='${match.f_name} ${match.l_name}' id='${match.id}'>${match.f_name} ${match.l_name} (${match.email})</a>
           </div>
           `
@@ -63,7 +63,6 @@ $('.match-members,.clickable').on('click', function(event) {
     }
     //   console.log(typeof event.target.id)
     projectTeamList.add(event.target.id);
-    //console.log(taskAssignList);
     $('#team').val('');
     $('.match-members').empty();
   }
@@ -126,14 +125,14 @@ $('#addProject').on('click', async function(event) {
     for (let x in NewProjectTeamList) {
       //console.log('User:', userList[x])
       await $.ajax({
-        url: `/api/tasks/adduser`,
-        type: 'PUT',
+        url: `/api/projects/adduser`,
+        type: 'POST',
         data: {
           projectId: `${projectID}`,
           userId: `${NewProjectTeamList[x]}`
         },
         success: function(result) {
-          return;
+          console.log('added someone');
         },
         error: function(request, msg, error) {
           console.log('failed');

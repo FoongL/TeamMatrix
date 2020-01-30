@@ -21,7 +21,7 @@ class TaskService {
       let idGrab = this.knex('tasks')
         .select('id')
         .where({ due_date: dueDate, created_by: userID })
-        .orderBy('due_date', 'DESC')
+        .orderBy('created_at', 'DESC')
         .limit('1');
       idGrab.then(data => {
         res(data);

@@ -1,15 +1,18 @@
 const ProjID = $('.secretIDHolder').attr('id');
 //----clearing forms when loaded
-$('#ProjNameEdit').click(function(event) {
+$('#ProjNameEdit').click(function (event) {
   $('#newProjName').val('');
 });
-$('#projDueEdit').click(function(event) {
-  console.log('DescEdit');
+$('#projDueEdit').click(function (event) {
+  $('#newProjDue').val('');
 });
-$('#ProjManUse').click(function(event) {});
+$('#ProjManUse').click(function (event) { 
+  $('#addMemProject').val('');
+
+});
 
 //----- simple edit forms ajax calls
-$('#nameChangeProj').click(async function(event) {
+$('#nameChangeProj').click(async function (event) {
   console.log('hello');
   if ($('#newProjName').val() == '') {
     alert('Please insert a usable new name!');
@@ -23,16 +26,16 @@ $('#nameChangeProj').click(async function(event) {
       projectId: `${ProjID}`,
       name: `${newName}`
     },
-    success: function(result) {
+    success: function (result) {
       location.reload();
     },
-    error: function(request, msg, error) {
+    error: function (request, msg, error) {
       console.log('failed');
     }
   });
 });
 
-$('#dueChangeProj').click(async function(event) {
+$('#dueChangeProj').click(async function (event) {
   let curTime = new Date();
   today = curTime.toISOString().slice(0, 10) + ' 00:00:00+08';
   taskDue = $('#newProjDue').val();
@@ -51,29 +54,180 @@ $('#dueChangeProj').click(async function(event) {
       projectId: `${ProjID}`,
       dueDate: `${taskDue}`
     },
-    success: function(result) {
+    success: function (result) {
       location.reload();
     },
-    error: function(request, msg, error) {
+    error: function (request, msg, error) {
       console.log('failed');
     }
   });
 });
 
+$('#projectDelete').click(async function (event) {
+  await $.ajax({
+    url: `/api/projects/remove`,
+    type: 'DELETE',
+    data: {
+      projectId: `${ProjID}`
+    },
+    success: function (result) {
+      window.location.href = result;
+    },
+    error: function (request, msg, error) {
+      console.log('failed');
+    }
+  });
+});
+//---------------adding users modal
 
+$('#ProjManUse').click(async function (event) {
+  let databaseUsers = '';
+  let inProjectUsers = '';
+  let checkID = [];
+  let addableUsers = [];
+  $('#ProjteamList').empty();
+  //---------------rendering out users list
+  let usersAlreadyIn;
+  await $.ajax({
+    url: `/api/projects/getusers`,
+    type: 'POST',
+    data: {
+      projectId: `${ProjID}`
+    },
+    success: function (result) {
+      usersAlreadyIn = result;
+    },
+    error: function (request, msg, error) {
+      console.log('failed');
+    }
+  });
+  for (z in usersAlreadyIn) {
+    console.log(usersAlreadyIn[z]);
+    $('#ProjteamList').append(
+      `<div  id="${usersAlreadyIn[z]['id']}"class='checkDiv'><div><ul>${usersAlreadyIn[z]['f_name']} ${usersAlreadyIn[z]['l_name']} (${usersAlreadyIn[z]['email']})</ul></div><i class="fas fa-user-minus trash"></i></div>`
+    );
+  }
 
-$('#projectDelete').click(async function(event){
-    await $.ajax({
-        url: `/api/projects/remove`,
-        type: 'DELETE',
+  await $.ajax({
+    url: `/api/projects/listallusers`,
+    type: 'POST',
+    success: function (result) {
+      console.log('data ready!');
+      databaseUsers = result;
+    },
+    error: function (request, msg, error) {
+      console.log('failed');
+    }
+  });
+  //console.log(databaseUsers);
+  $('#addMemProject').on('input', async function (event) {
+    if ($('#addMemProject').val().length <= 1) {
+      checkID = [];
+      addableUsers = [];
+      console.log($('#addMemProject').val().length);
+      await $.ajax({
+        url: `/api/projects/getusers`,
+        type: 'POST',
         data: {
-          projectId: `${ProjID}`,
+          projectId: `${ProjID}`
         },
-        success: function(result) {
-        window.location.href=result
+        success: function (result) {
+          inProjectUsers = result;
         },
-        error: function(request, msg, error) {
+        error: function (request, msg, error) {
           console.log('failed');
         }
       });
+      for (let x in inProjectUsers) {
+        checkID.push(inProjectUsers[x]['id']);
+      }
+
+      for (y in databaseUsers) {
+        if (checkID.includes(databaseUsers[y]['id']) === false) {
+          //console.log(databaseUsers[y]);
+          addableUsers.push(databaseUsers[y]);
+        }
+      }
+    }
+    searchText = $('#addMemProject').val();
+    let matches = addableUsers.filter(user => {
+      const regex = new RegExp(`^${searchText}`, 'gi');
+      return (
+        user.f_name.match(regex) ||
+        user.l_name.match(regex) ||
+        user.email.match(regex)
+      );
+    });
+    if (searchText.length === 0) {
+      matches = [];
+    }
+    const outputHTML = async matches => {
+      if ($('#addMemProject').val().length === 0) {
+        $('#addMemListProj').empty();
+      }
+      if (matches.length > 0) {
+        const output = await matches
+          .map(
+            match => `
+              <div id='${match.id}'>
+              <a class='clickable' name='${match.f_name} ${match.l_name}(${match.email})' id='${match.id}'>${match.f_name} ${match.l_name} (${match.email})</a>
+              </div>
+              `
+          )
+          .join('');
+        $('#addMemListProj').empty();
+        $('#addMemListProj').append(output);
+      }
+    };
+    outputHTML(matches);
+  });
+});
+$('#addMemListProj,.clickable').on('click', async function (event) {
+  console.log('hello')
+  console.log(event.target.id)
+  console.log(event.target.name)
+  await $.ajax({
+    url: `/api/projects/adduser`,
+    type: 'POST',
+    data: {
+      projectId: `${ProjID}`,
+      userId: `${event.target.id}`
+    },
+    success: function (result) {
+      console.log('added someone');
+    },
+    error: function (request, msg, error) {
+      console.log('failed');
+    }
+  });
+  $('#ProjteamList').append(
+    `<div  id="${event.target.id}"class='checkDiv'><div><ul>${event.target.name}</ul></div><i class="fas fa-user-minus trash"></i></div>`
+  );
+  $('#addMemProject').val('')
+  $('#addMemListProj').empty();
+})
+
+//deleting users form a project
+$('#ProjteamList').on('click', '.trash', async function() {
+  delMemId = $(this).parent()[0]['id'];
+console.log(delMemId)
+
+await $.ajax({
+  url: `/api/projects/remuser`,
+  type: 'POST',
+  data: {
+    projectId: `${ProjID}`,
+    user: `${delMemId}`
+  },
+  success: function(result) {
+    return;
+  },
+  error: function(request, msg, error) {
+    console.log('failed');
+  }
+});
+$('#ProjteamList')
+.children(`#${delMemId}`)
+.hide();
+
 })
