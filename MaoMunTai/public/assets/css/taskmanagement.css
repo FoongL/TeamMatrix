@@ -276,6 +276,7 @@ form label {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 20px;
 }
 #dateDisp p {
   font-size: 20px;
@@ -314,7 +315,7 @@ form label {
 #TaskModalBody {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #TaskModalBodyBreak {
   width: 53%;
@@ -331,9 +332,12 @@ form label {
   width: 100%;
   height: 30%;
 }
-/* #subtaskCheck{
-  max-height: 37vh;
-} */
+#TaskEditList{
+  margin-top: 20px;
+}
+#subtaskCheck{
+  margin-top:20px;
+}
 #checkList {
   max-height: 35vh;
   overflow: scroll;
