@@ -1,53 +1,57 @@
-  body{
+body {
   font-family: 'Nunito', sans-serif;
-
 }
 
-.header{
-  margin:30px;
+.header {
+  margin: 30px;
   text-align: center;
 }
 
-  .container-form {
-    border-radius: 5px;
-    background-color: #1C1D23;
-    padding: 20px;
-    height: fit-content;
-    width: fit-content;
-    overflow: auto;
+.container-form {
+  border-radius: 5px;
+  background-color: #1c1d23;
+  padding: 20px;
+  height: fit-content;
+  width: 70%;
+  overflow: auto;
   margin: 0 auto;
 }
- 
-  .block{
-    display: block;
-    margin: 5px;
-    width: 250px;
 
+.container-form label{
+  font-size: 24px ;
+}
+.container-form input{
+  width:100%;
+}
+.block {
+  display: block;
+  margin: 5px;
+  width: 250px;
+}
+
+.block-mem {
+  display: block;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-bottom: 0px;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  input[type='submit'] {
+    width: 100%;
+    margin-top: 0;
   }
+}
 
-  .block-mem{
-    display: block;
-    margin-top: 5px;
-    margin-left: 5px;
-  }
+.content-create {
+  position: absolute;
+  min-height: 300px;
+  padding: 0 0 0 300px;
+  width: 100vw;
+}
 
-  
-  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-  input[type=submit] {
-      width: 100%;
-      margin-top: 0;
-    }
-  }
-
-  .content-create {
-    position: absolute;
-    min-height: 300px;
-    padding: 0 0 0 300px;
-    width: 100vw;
-  }
-
-  /* input[type=text]{
+/* input[type=text]{
     border: 2px solid #000000;
     border-radius: 4px;
     width: 300px;
@@ -55,31 +59,54 @@
 
   } */
 
-#due-date{
+#due-date {
   border: 2px solid #000000;
-    border-radius: 4px;
-    width: 300px;
-    height: 30px;
+  border-radius: 4px;
+  width: 300px;
+  height: 30px;
 }
 
-.show-members{
-  height: 30px;
+.show-members {
+  height: 20px;
   display: flex;
   flex-direction: row;
 }
 
-.match-members{
-  height: 30px;
+.match-members {
+  height: 60px;
   display: flex;
   flex-direction: row;
+  overflow: scroll;
 }
-#addProject{
+
+.match-members .clickable {
+  margin-top: 5px;
+  margin-right: 13px;
+  display: inline-block;
+}
+.match-members .clickable:hover {
+  color: rgb(13, 88, 201);
+  transition: 0.3s;
+}
+.match-members .clickable:after {
+  content: '';
+  width: 0px;
+  height: 2px;
+  display: block;
+  background: rgb(13, 88, 201);
+  transition: 300ms;
+}
+
+.match-members .clickable:hover:after {
+  width: 100%;
+}
+#addProject {
   width: fit-content;
   border-radius: 5px;
   float: right;
 }
 
-#addProject:hover{
+#addProject:hover {
   background: transparent;
   color: #5c5edc;
   border-color: #5c5edc;

@@ -110,8 +110,6 @@ $('.assigned').on('click', async function(event) {
     }
 
     let newName = $('#newtaskName').val();
-    console.log(TaskId);
-    console.log(newName);
     await $.ajax({
       url: `/api/tasks/amendname`,
       type: 'PUT',
@@ -222,7 +220,7 @@ $('.assigned').on('click', async function(event) {
   });
 
   //---- adding a new subtask
-  $('#addTaskButton').on('click', function(event) {
+  $('.textLink').click(function(event) {
     $('#addsubtaskName').val('');
     $('#addsubtaskDue').val('');
   });
@@ -435,8 +433,6 @@ $('.assigned').on('click', async function(event) {
   });
   $('#addMem').click(async function(event) {
     let userList = Array.from(taskAssignList);
-    console.log('anNnyung world');
-    console.log(TaskId);
     for (x in userList) {
       await $.ajax({
         url: `/api/tasks/adduser`,
@@ -558,31 +554,25 @@ $('.assigned').on('click', async function(event) {
       $('#switch').prop('checked', true);
     }
   });
-//----- DELETEING... NUKING THE TASK
-$('#taskDelete').click(async function(event){
-    console.log('hello')
+  //----- DELETEING... NUKING THE TASK
+  $('#taskDelete').click(async function(event) {
     await $.ajax({
-        url: `/api/tasks/remove`,
-        type: 'DELETE',
-        data: {
-          taskID: `${TaskId}`
-        },
-        success: function(result) {
-         location.reload()
-        },
-        error: function(request, msg, error) {
-          console.log('failed');
-        }
-      });
-
-
-
-})
-
+      url: `/api/tasks/remove`,
+      type: 'DELETE',
+      data: {
+        taskID: `${TaskId}`
+      },
+      success: function(result) {
+        location.reload();
+      },
+      error: function(request, msg, error) {
+        console.log('failed');
+      }
+    });
+  });
 });
 
 //---- closing dialog box with done button only
 $('#closeTaskDetail').on('click', function(event) {
   location.reload();
 });
-
