@@ -264,7 +264,8 @@ body{
     width: 170px;
     font-size: 15px;
     padding:3px;
-    
+    height: 20px;
+    margin: 5px;
   }
  
   .input-password{
@@ -282,6 +283,8 @@ body{
     width: 170px;
     font-size: 15px;
     padding:3px;
+    height: 20px;
+    margin:5px;
   }
 
   .input-submit{
@@ -376,6 +379,20 @@ display: block;
     grid-auto-rows: minmax(40px, auto);
     margin-top: 45px;
 }
+
+.flex-con-row{
+    display: flex;
+    -ms-box-orient: horizontal;
+    flex-direction: row;
+}
+
+.flex-con-col{
+    display: flex;
+    -ms-box-orient: horizontal;
+    flex-direction: column;
+}
+
+
 
 .grid-1-1{
 grid-column: 1;

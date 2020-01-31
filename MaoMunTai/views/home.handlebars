@@ -1,7 +1,7 @@
 <section class="main-cover">
     <!-- The overlay -->
     <div class="cover-overlay"></div>
-        <div id="learn-more" class="overlay">
+    <div id="learn-more" class="overlay">
 
         <!-- Button to close the overlay navigation -->
         <a href="#" id="closebtn" class="sticky closebtn" onclick="closeNav()">&times;</a>
@@ -90,28 +90,58 @@
                         <div class="content">
                             <form action="/signup" method="post">
                                 <div class="sub-main-grid">
-                                    <div class="grid-1-1">
-                                        <label for="fname" class="ink-text-s">First Name : </label>
-                                        <input type="text" id="fname" class="input-text-s" name="fName"
-                                            placeholder="Your First Name">
-                                    </div>
-                                    <div class="grid-1-2">
-                                        <label for="lname" class="ink-text-s">Last Name : </label>
-                                        <input type="text" id="lname" class="input-text-s" name="lName"
-                                            placeholder="Your Last Name">
-                                    </div>
-                                    <div class="grid-2-1">
-                                        <label for="email" class="ink-text-s">Email : </label>
-                                        <input type="text" id="signup-email" class="input-text-s" name="username"
-                                            placeholder="Login Email">
-                                    </div>
-                                    <div class="grid-2-2">
-                                        <label for="password" class="ink-text-s">Password : </label>
-                                        <input type="password" id="signup-password" class="input-password-s"
-                                            name="password" placeholder="Login Password">
-                                    </div>
+                                    <div class="flex-con-row">
+                                        <div class="flex-con-col">
+                                            <div>
+                                                <div class="grid-1-1">
+                                                    <div class="flex-con-col">
+                                                        <label for="fname" class="ink-text-s">First Name : </label>
 
-                                    <input type="submit" value="Sign Up" class="input-submit-s">
+                                                        <input type="text" id="fname" class="input-text-s" name="fName"
+                                                            placeholder="Your First Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="grid-1-2">
+                                                    <div class="flex-con-col">
+                                                        <label for="lname" class="ink-text-s">Last Name : </label>
+
+                                                        <input type="text" id="lname" class="input-text-s" name="lName"
+                                                            placeholder="Your Last Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-con-col">
+                                            <div>
+                                                <div class="grid-2-1">
+                                                    <div class="flex-con-col">
+                                                        <label for="email" class="ink-text-s">Email : </label>
+
+                                                        <input type="text" id="signup-email" class="input-text-s"
+                                                            name="username" placeholder="Login Email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="grid-2-2">
+                                                    <div class="flex-con-col" style="margin-top:-5px;">
+                                                        <label for="password" class="ink-text-s">Password : </label>
+
+                                                        <input type="password" id="signup-password"
+                                                            class="input-password-s" name="password"
+                                                            placeholder="Login Password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        
+                                            <input type="submit" value="Sign Up" class="input-submit-s">
+                                        
+
+                                    </div>
                                 </div>
                             </form>
                         </div>
