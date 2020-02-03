@@ -55,14 +55,18 @@ const teamOutput = async matches => {
   }
 };
 
-$('.match-members,.clickable').on('click', function(event) {
-  if (event.target.id !== 'nameList' || event.target.name !== undefined) {
+$('.match-members, .clickable').on('click', function(event) {
+  if (event.target.name === undefined){
+    return
+  }
+  if ((event.target.class !== 'match-members') || (event.target.name !== undefined)|| (event.target.class !== undefined)) {
     if (projectTeamList.has(event.target.id) === false) {
       let nameOutput = `<p class='memberList'>${event.target.name}</p>`;
       $('.show-members').append(nameOutput);
+      projectTeamList.add(event.target.id);
     }
     //   console.log(typeof event.target.id)
-    projectTeamList.add(event.target.id);
+    
     $('#team').val('');
     $('.match-members').empty();
   }

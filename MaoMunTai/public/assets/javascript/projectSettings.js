@@ -8,6 +8,7 @@ $('#projDueEdit').click(function (event) {
 });
 $('#ProjManUse').click(function (event) { 
   $('#addMemProject').val('');
+  $('#addMemListProj').empty()
 
 });
 

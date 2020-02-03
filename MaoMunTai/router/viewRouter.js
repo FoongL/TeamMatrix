@@ -62,7 +62,7 @@ module.exports = express => {
     if (dateCountDown == 0) {
       dateCountDown = 'DUE TODAY!';
     } else if (dateCountDown > 0) {
-      dateCountDown = dateCountDown + ' Days Remaining';
+      dateCountDown = Math.round(dateCountDown) + ' Days Remaining';
     } else {
       dateCountDown = Math.abs(dateCountDown) + ' Days Overdue';
     }
@@ -140,9 +140,9 @@ module.exports = express => {
     if (dateCountDown == 0) {
       dateCountDown = 'DUE TODAY!';
     } else if (dateCountDown > 0) {
-      dateCountDown = dateCountDown + ' Days Remaining';
+      dateCountDown = Math.round(dateCountDown) + ' Day(s) Remaining';
     } else {
-      dateCountDown = Math.abs(dateCountDown) + ' Days Overdue';
+      dateCountDown = Math.abs(dateCountDown) + ' Day(s) Overdue';
     }
     let months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
     let dateDue =
