@@ -42,6 +42,20 @@ body{
     z-index: 1;
 }
 
+.bbc{
+    padding: 8px;
+    text-decoration: none;
+    color: #A60E01;
+    display: block; 
+}
+
+.yellow-t{
+    padding: 8px;
+    text-decoration: none;
+    color: #F7C007;
+    display: block; 
+}
+
 .name{
     font-size: 60px;
     color: #A60E01;
@@ -125,7 +139,6 @@ body{
 /* Learn More */
 
 .overlay {
-    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
     height: 0%;
     width: 100%;
     position: fixed; /* Stay in place */
@@ -152,14 +165,14 @@ body{
     padding: 8px;
     text-decoration: none;
     color: #ccc;
-    display: block; /* Display block instead of inline */
+    display: block; 
   }
 
 .features{
     padding: 8px;
     text-decoration: none;
     color: #ccc;
-    display: block; /* Display block instead of inline */
+    display: block; 
 }
 
   .about-main-grid{
@@ -177,6 +190,18 @@ body{
 .features-sub-grid{
     grid-column: 3;
     grid-row:1;
+}
+
+.features-icon{
+    background-image: url(/assets/images/project-manager-roles.png);
+    border-radius: 50%;
+    height: 180px;
+    width: 200px;
+    margin-left:50px;
+}
+
+.features-icon:hover{
+    background-image: url(/assets/images/mao-icon.png);
 }
 
   /* Position the close button (top right corner) */
