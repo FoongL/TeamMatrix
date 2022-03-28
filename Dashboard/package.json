@@ -37,7 +37,7 @@
     "mime-db": "^1.43.0",
     "mime-types": "^2.1.26",
     "minimatch": "^3.0.4",
-    "minimist": "^0.0.10",
+    "minimist": "^1.2.6",
     "ms": "^2.0.0",
     "negotiator": "^0.6.2",
     "neo-async": "^2.6.1",
